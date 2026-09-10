@@ -1,0 +1,196 @@
+<Window x:Class="KlstBackup.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:KlstBackup.ViewModels"
+        Title="File Backup"
+        Width="980" Height="640"
+        MinWidth="820" MinHeight="520"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <vm:InverseBooleanConverter x:Key="InverseBool" />
+        <vm:EnumEqualsToVisibilityConverter x:Key="EnumToVis" />
+    </Window.Resources>
+
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom" Height="30">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusText}" TextTrimming="CharacterEllipsis" MaxWidth="480" />
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <ProgressBar Width="240" Height="14"
+                             Minimum="0" Maximum="100"
+                             Value="{Binding ProgressPercent, Mode=OneWay}" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding ProgressText}" TextTrimming="CharacterEllipsis" MaxWidth="360"
+                           Foreground="Gray" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <TabControl Margin="6">
+            <!-- ================= Jobs ================= -->
+            <TabItem Header="Jobs">
+                <Grid Margin="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="360" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Grid.Column="0" Margin="0,0,10,0">
+                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
+                            <Button Content="New" Command="{Binding NewJobCommand}" Padding="12,4" Margin="0,0,6,0" />
+                            <Button Content="Edit" Command="{Binding EditJobCommand}" Padding="12,4" Margin="0,0,6,0" />
+                            <Button Content="Delete" Command="{Binding DeleteJobCommand}" Padding="12,4" Margin="0,0,6,0" />
+                            <Button Content="Run Now" Command="{Binding RunNowCommand}" Padding="12,4" Margin="0,0,6,0"
+                                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+                            <Button Content="Stop" Command="{Binding StopRunCommand}" Padding="12,4"
+                                    IsEnabled="{Binding IsBusy}" />
+                        </StackPanel>
+
+                        <ListBox ItemsSource="{Binding Jobs}" SelectedItem="{Binding SelectedJob}"
+                                 HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="4">
+                                        <DockPanel>
+                                            <CheckBox IsChecked="{Binding Enabled, UpdateSourceTrigger=PropertyChanged}"
+                                                      VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" Margin="8,0,0,0"
+                                                       TextTrimming="CharacterEllipsis" />
+                                        </DockPanel>
+                                        <TextBlock Text="{Binding ScheduleSummary}" Foreground="Gray" FontSize="11"
+                                                   Margin="24,2,0,0" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </DockPanel>
+
+                    <Border Grid.Column="1" BorderBrush="#DDD" BorderThickness="1" CornerRadius="4"
+                            Padding="16" Background="#FAFAFA">
+                        <StackPanel DataContext="{Binding SelectedJob}">
+                            <TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"
+                                       TextTrimming="CharacterEllipsis" />
+                            <TextBlock Text="{Binding ScheduleSummary}" Foreground="Gray" Margin="0,4,0,14" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="28" />
+                                    <RowDefinition Height="28" />
+                                    <RowDefinition Height="28" />
+                                    <RowDefinition Height="28" />
+                                    <RowDefinition Height="28" />
+                                    <RowDefinition Height="28" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Source:" FontWeight="SemiBold" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SourcePath}"
+                                           TextTrimming="CharacterEllipsis" ToolTip="{Binding SourcePath}" />
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Destination:" FontWeight="SemiBold" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding DestPath}"
+                                           TextTrimming="CharacterEllipsis" ToolTip="{Binding DestPath}" />
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Backup type:" FontWeight="SemiBold" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding JobType}" />
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Next run:" FontWeight="SemiBold" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding NextRunText}" />
+
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="Last run:" FontWeight="SemiBold" />
+                                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding LastRunText}" />
+
+                                <TextBlock Grid.Row="5" Grid.Column="0" Text="Enabled:" FontWeight="SemiBold" />
+                                <TextBlock Grid.Row="5" Grid.Column="1">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="No" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Enabled}" Value="True">
+                                                    <Setter Property="Text" Value="Yes" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+
+                            <TextBlock Text="Differential runs copy only files changed since the last full backup. When no full backup exists yet, the first run is performed as a full backup."
+                                       TextWrapping="Wrap" Foreground="Gray" FontSize="11" Margin="0,16,0,0" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <!-- ================= History ================= -->
+            <TabItem Header="History">
+                <DataGrid Margin="8" ItemsSource="{Binding History}"
+                          AutoGenerateColumns="False" IsReadOnly="True"
+                          HeadersVisibility="Column" GridLinesVisibility="Horizontal"
+                          CanUserAddRows="False" SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Job" Binding="{Binding JobName}" Width="150" />
+                        <DataGridTextColumn Header="Started (local)" Binding="{Binding StartedUtc, StringFormat=yyyy-MM-dd HH:mm:ss}" Width="150" />
+                        <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="90" />
+                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="150" />
+                        <DataGridTextColumn Header="Files" Binding="{Binding FilesCopied}" Width="70" />
+                        <DataGridTextColumn Header="Bytes" Binding="{Binding BytesCopied, StringFormat=N0}" Width="110" />
+                        <DataGridTextColumn Header="Duration" Binding="{Binding Duration, StringFormat=hh\:mm\:ss}" Width="90" />
+                        <DataGridTextColumn Header="Details" Binding="{Binding Message}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- ================= Restore ================= -->
+            <TabItem Header="Restore">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="20" MaxWidth="680" HorizontalAlignment="Left">
+                        <TextBlock Text="Restore a backup set to a folder" FontSize="16" FontWeight="SemiBold"
+                                   Margin="0,0,0,12" />
+
+                        <TextBlock Text="Job:" Margin="0,0,0,4" />
+                        <ComboBox ItemsSource="{Binding Jobs}" DisplayMemberPath="Name"
+                                  SelectedItem="{Binding RestoreJob}" Margin="0,0,0,10" />
+
+                        <TextBlock Text="Backup set (newest first):" Margin="0,0,0,4" />
+                        <ComboBox ItemsSource="{Binding BackupSets}"
+                                  SelectedItem="{Binding SelectedBackupSet}" Margin="0,0,0,10" />
+
+                        <TextBlock Text="Restore into folder:" Margin="0,0,0,4" />
+                        <DockPanel Margin="0,0,0,12">
+                            <Button DockPanel.Dock="Right" Content="Browse..." Padding="10,3"
+                                    Command="{Binding BrowseRestoreTargetCommand}" Margin="6,0,0,0" />
+                            <TextBox Text="{Binding RestoreTargetPath, UpdateSourceTrigger=PropertyChanged}"
+                                     VerticalContentAlignment="Center" />
+                        </DockPanel>
+
+                        <Button Content="Restore" Padding="20,5" HorizontalAlignment="Left"
+                                Command="{Binding RestoreCommand}"
+                                IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
+
+                        <TextBlock Margin="0,14,0,0" TextWrapping="Wrap" Foreground="Gray"
+                                   Text="For a differential set, the base full backup is restored first and the differential files are applied on top, so the target ends up with the files as they were at the time of that differential run." />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ================= Settings ================= -->
+            <TabItem Header="Settings">
+                <StackPanel Margin="20" MaxWidth="680" HorizontalAlignment="Left">
+                    <CheckBox Content="Start File Backup when Windows starts"
+                              IsChecked="{Binding StartWithWindows, UpdateSourceTrigger=PropertyChanged}"
+                              Margin="0,0,0,10" />
+                    <TextBlock TextWrapping="Wrap" Foreground="Gray"
+                               Text="The application keeps running in the system tray after you close the window. Scheduled backups only run while the application is running, so starting it with Windows is recommended." />
+                    <TextBlock TextWrapping="Wrap" Foreground="Gray" Margin="0,16,0,0"
+                               Text="Run history and per-run logs are stored in %APPDATA%\FileBackup. Each backup set folder contains a manifest.json describing the files captured by that run." />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

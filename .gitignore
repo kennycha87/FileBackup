@@ -1,0 +1,31 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/release/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio / Rider cache
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Test results
+[Tt]est[Rr]esult*/
+TestResults/
+
+# NuGet
+*.nupkg
+**/packages/*
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+# Publish output
+publish/
