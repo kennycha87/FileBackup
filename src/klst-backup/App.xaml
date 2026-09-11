@@ -10,5 +10,9 @@
         <vm:UtcToLocalTextConverter  x:Key="UtcToLocalText" />
         <vm:EnumDisplayNameConverter x:Key="EnumDisplayName" />
         <vm:RunMessageConverter      x:Key="RunMessage" />
+        <!-- Visibility switches used by the dashboard task cards: both use Collapsed
+             (not Hidden) so layout reflows properly when Pause/Resume buttons swap. -->
+        <vm:BoolToVisibilityConverter x:Key="BoolToVis" />
+        <vm:InverseBoolToVisibilityConverter x:Key="InverseBoolToVis" />
     </Application.Resources>
 </Application>

@@ -299,6 +299,24 @@ public partial class MainViewModel : ObservableObject
         StatusText = Strings.Status_Stopping;
     }
 
+    private DashboardWindow? _dashboard;
+
+    /// <summary>Shows the floating task dashboard, or brings the existing one to the front.</summary>
+    [RelayCommand]
+    private void OpenDashboard()
+    {
+        if (_dashboard is null)
+        {
+            _dashboard = new DashboardWindow(new DashboardViewModel(App.TaskQueue, App.ResourceMonitor));
+            _dashboard.Closed += (_, _) => _dashboard = null;
+            _dashboard.Show();
+        }
+        else
+        {
+            _dashboard.Activate();
+        }
+    }
+
     private async void StartRun(BackupJob job)
     {
         if (IsBusy)

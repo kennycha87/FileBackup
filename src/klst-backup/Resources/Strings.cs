@@ -72,6 +72,8 @@ public static class Strings
 
     public static string Btn_Stop => Get(nameof(Btn_Stop));
 
+    public static string Btn_Dashboard => Get(nameof(Btn_Dashboard));
+
     public static string Btn_Browse => Get(nameof(Btn_Browse));
 
     public static string Btn_Restore => Get(nameof(Btn_Restore));
@@ -79,6 +81,20 @@ public static class Strings
     public static string Btn_Ok => Get(nameof(Btn_Ok));
 
     public static string Btn_Cancel => Get(nameof(Btn_Cancel));
+
+    public static string Btn_Pause => Get(nameof(Btn_Pause));
+
+    public static string Btn_Resume => Get(nameof(Btn_Resume));
+
+    // ----- Dashboard window -----
+
+    public static string Dashboard_Title => Get(nameof(Dashboard_Title));
+
+    public static string Dashboard_ResourceMonitor => Get(nameof(Dashboard_ResourceMonitor));
+
+    public static string Dashboard_CPU => Get(nameof(Dashboard_CPU));
+
+    public static string Dashboard_Memory => Get(nameof(Dashboard_Memory));
 
     // ----- Job detail labels (trailing colons are part of the value) -----
 

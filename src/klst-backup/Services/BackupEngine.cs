@@ -17,7 +17,7 @@ namespace KlstBackup.Services;
 public class BackupEngine
 {
     public BackupResult RunBackup(BackupJob job, BackupType requestedType, IProgress<BackupProgress>? progress,
-        CancellationToken ct, RunLog? log)
+        CancellationToken ct, RunLog? log, BackupTask? task = null)
     {
         var sw = Stopwatch.StartNew();
         var result = new BackupResult { Type = requestedType };
@@ -49,11 +49,11 @@ public class BackupEngine
 
             if (type == BackupType.Full)
             {
-                CopyFull(job, destPath, setName, progress, ct, log, result);
+                CopyFull(job, destPath, setName, progress, ct, log, result, task);
             }
             else
             {
-                CopyDifferential(job, destPath, setName, progress, ct, log, result);
+                CopyDifferential(job, destPath, setName, progress, ct, log, result, task);
             }
 
             result.Success = true;
@@ -130,7 +130,7 @@ public class BackupEngine
     }
 
     private void CopyFull(BackupJob job, string destPath, string setName, IProgress<BackupProgress>? progress,
-        CancellationToken ct, RunLog? log, BackupResult result)
+        CancellationToken ct, RunLog? log, BackupResult result, BackupTask? task)
     {
         var sourceRoot = job.SourcePath!;
         var files = CollectFiles(sourceRoot);
@@ -147,7 +147,7 @@ public class BackupEngine
         long copiedBytes = 0;
         foreach (var file in files)
         {
-            ct.ThrowIfCancellationRequested();
+            CheckTaskState(task, ct);
             var relative = Path.GetRelativePath(sourceRoot, file.Info.FullName).Replace('\\', '/');
             try
             {
@@ -167,6 +167,7 @@ public class BackupEngine
             }
 
             done++;
+            UpdateTaskProgress(task, done, files.Count, copiedBytes, totalBytes, relative);
             progress?.Report(new BackupProgress
             {
                 CurrentFile = relative,
@@ -183,7 +184,7 @@ public class BackupEngine
     }
 
     private void CopyDifferential(BackupJob job, string destPath, string setName, IProgress<BackupProgress>? progress,
-        CancellationToken ct, RunLog? log, BackupResult result)
+        CancellationToken ct, RunLog? log, BackupResult result, BackupTask? task)
     {
         var fullSetName = ManifestStore.FindLatestFullSet(job.Id)!;
         var baseManifest = ManifestStore.Load(job.Id, fullSetName) ?? new BackupManifest();
@@ -199,7 +200,7 @@ public class BackupEngine
         var changed = new List<(SourceFile File, string Relative)>();
         foreach (var file in files)
         {
-            ct.ThrowIfCancellationRequested();
+            CheckTaskState(task, ct);
             var relative = Path.GetRelativePath(sourceRoot, file.Info.FullName).Replace('\\', '/');
             baseline.TryGetValue(relative, out var baseEntry);
             var isChanged = baseEntry is null
@@ -225,7 +226,7 @@ public class BackupEngine
         long copiedBytes = 0;
         foreach (var (file, relative) in changed)
         {
-            ct.ThrowIfCancellationRequested();
+            CheckTaskState(task, ct);
             try
             {
                 CopyFile(file.Info.FullName, destPath, relative, overwrite: true);
@@ -244,6 +245,7 @@ public class BackupEngine
             }
 
             done++;
+            UpdateTaskProgress(task, done, changed.Count, copiedBytes, totalBytes, relative);
             progress?.Report(new BackupProgress
             {
                 CurrentFile = relative,
@@ -257,6 +259,57 @@ public class BackupEngine
         result.FilesCopied = done;
         result.BytesCopied = copiedBytes;
         ManifestStore.Save(manifest, job.Id, setName);
+    }
+
+    /// <summary>
+    /// Blocks while the owning <see cref="BackupTask"/> is paused, and throws
+    /// <see cref="OperationCanceledException"/> when the run is cancelled - either through
+    /// <paramref name="ct"/> or because the task itself was cancelled (e.g. from the
+    /// dashboard). With no owning task this reduces to <c>ct.ThrowIfCancellationRequested()</c>.
+    /// </summary>
+    private static void CheckTaskState(BackupTask? task, CancellationToken ct)
+    {
+        if (task is null)
+        {
+            ct.ThrowIfCancellationRequested();
+            return;
+        }
+
+        if (task.IsCancelled)
+        {
+            throw new OperationCanceledException(ct);
+        }
+
+        ct.ThrowIfCancellationRequested();
+
+        // Cancel() does not clear IsPaused, so the cancelled check must run inside the
+        // wait loop as well or a task cancelled while paused would spin forever.
+        while (task.IsPaused)
+        {
+            if (task.IsCancelled)
+            {
+                throw new OperationCanceledException(ct);
+            }
+
+            ct.ThrowIfCancellationRequested();
+            Thread.Sleep(100);
+        }
+    }
+
+    /// <summary>Mirrors copy progress onto the owning task so the dashboard shows live numbers.</summary>
+    private static void UpdateTaskProgress(BackupTask? task, int filesDone, int totalFiles,
+        long bytesCopied, long totalBytes, string currentFile)
+    {
+        if (task is null)
+        {
+            return;
+        }
+
+        task.FilesProcessed = filesDone;
+        task.TotalFiles = totalFiles;
+        task.BytesProcessed = bytesCopied;
+        task.TotalBytes = totalBytes;
+        task.CurrentFile = currentFile;
     }
 
     private void CopyDirectoryContents(string sourceDir, string targetDir, IProgress<BackupProgress>? progress,

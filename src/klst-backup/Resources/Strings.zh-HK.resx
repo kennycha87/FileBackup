@@ -121,6 +121,9 @@
   <data name="Btn_Stop" xml:space="preserve">
     <value>停止</value>
   </data>
+  <data name="Btn_Dashboard" xml:space="preserve">
+    <value>任務面板</value>
+  </data>
   <data name="Btn_Browse" xml:space="preserve">
     <value>瀏覽…</value>
   </data>
@@ -132,6 +135,26 @@
   </data>
   <data name="Btn_Cancel" xml:space="preserve">
     <value>取消</value>
+  </data>
+  <data name="Btn_Pause" xml:space="preserve">
+    <value>暫停</value>
+  </data>
+  <data name="Btn_Resume" xml:space="preserve">
+    <value>繼續</value>
+  </data>
+
+  <!-- ===== Dashboard window ===== -->
+  <data name="Dashboard_Title" xml:space="preserve">
+    <value>活躍備份任務</value>
+  </data>
+  <data name="Dashboard_ResourceMonitor" xml:space="preserve">
+    <value>顯示資源監控</value>
+  </data>
+  <data name="Dashboard_CPU" xml:space="preserve">
+    <value>CPU：</value>
+  </data>
+  <data name="Dashboard_Memory" xml:space="preserve">
+    <value>記憶體：</value>
   </data>
 
   <!-- ===== Job detail labels ===== -->

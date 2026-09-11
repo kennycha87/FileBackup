@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Windows;
 using KlstBackup.Models;
@@ -19,6 +20,9 @@ public partial class App : Application
     public static ConfigService ConfigService { get; private set; } = null!;
     public static AppConfig Config { get; private set; } = null!;
     public static BackupEngine Engine { get; private set; } = null!;
+    public static TaskQueueManager TaskQueue { get; private set; } = null!;
+    public static CheckpointStore Checkpoints { get; private set; } = null!;
+    public static ResourceMonitor ResourceMonitor { get; private set; } = null!;
     public static SchedulerService Scheduler { get; private set; } = null!;
 
     static App()
@@ -65,6 +69,16 @@ public partial class App : Application
         }
     }
 
+    /// <summary>
+    /// The per-user application data folder (…\FileBackup) that also holds config.json.
+    /// <see cref="CheckpointStore"/> keeps its checkpoint files in a "checkpoints" subfolder.
+    /// </summary>
+    private static string GetAppDataFolder()
+    {
+        return Path.GetDirectoryName(ConfigService.ConfigPath)
+            ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FileBackup");
+    }
+
     protected override void OnStartup(StartupEventArgs e)
     {
         _singleInstanceMutex = new Mutex(true, "FileBackup_SingleInstance_" + Environment.UserName, out var createdNew);
@@ -79,7 +93,10 @@ public partial class App : Application
         Config = ConfigService.Load();
         ApplyUiLanguage(Config.Language);
         Engine = new BackupEngine();
-        Scheduler = new SchedulerService(Config, ConfigService, Engine, Log);
+        TaskQueue = new TaskQueueManager();
+        Checkpoints = new CheckpointStore(GetAppDataFolder());
+        ResourceMonitor = new ResourceMonitor();
+        Scheduler = new SchedulerService(Config, ConfigService, Engine, Log, TaskQueue);
 
         base.OnStartup(e);
 
