@@ -28,6 +28,17 @@ public class InverseBoolToVisibilityConverter : IValueConverter
         => value is Visibility.Collapsed;
 }
 
+/// <summary>Maps a bool to Visibility: true shows, false collapses
+/// (e.g. a Resume button that must appear while the task is paused).</summary>
+public class BoolToVisibilityConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        => value is true ? Visibility.Visible : Visibility.Collapsed;
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        => value is Visibility.Visible;
+}
+
 /// <summary>Collapses an element unless the bound enum value equals the ConverterParameter.</summary>
 public class EnumEqualsToVisibilityConverter : IValueConverter
 {

@@ -8,6 +8,11 @@
         WindowStartupLocation="CenterScreen"
         Topmost="True">
 
+    <Window.Resources>
+        <vm:InverseBoolToVisibilityConverter x:Key="InverseBoolToVis" />
+        <vm:BoolToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

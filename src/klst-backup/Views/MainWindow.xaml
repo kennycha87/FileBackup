@@ -45,8 +45,9 @@
                             <Button Content="{x:Static res:Strings.Btn_Delete}" Command="{Binding DeleteJobCommand}" Padding="12,4" Margin="0,0,6,0" />
                             <Button Content="{x:Static res:Strings.Btn_RunNow}" Command="{Binding RunNowCommand}" Padding="12,4" Margin="0,0,6,0"
                                     IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}" />
-                            <Button Content="{x:Static res:Strings.Btn_Stop}" Command="{Binding StopRunCommand}" Padding="12,4"
+                            <Button Content="{x:Static res:Strings.Btn_Stop}" Command="{Binding StopRunCommand}" Padding="12,4" Margin="0,0,6,0"
                                     IsEnabled="{Binding IsBusy}" />
+                            <Button Content="{x:Static res:Strings.Btn_Dashboard}" Command="{Binding OpenDashboardCommand}" Padding="12,4" />
                         </StackPanel>
 
                         <ListBox ItemsSource="{Binding Jobs}" SelectedItem="{Binding SelectedJob}"

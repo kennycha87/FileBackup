@@ -78,6 +78,26 @@ public class TaskQueueManager
         }
     }
 
+    /// <summary>
+    /// Removes a task that is still waiting in the queue (never started). Used by
+    /// SchedulerService to back a manual run out when every disk slot is busy. Returns
+    /// false when the task already started or is unknown.
+    /// </summary>
+    public bool TryRemoveQueued(Guid taskId)
+    {
+        lock (_lock)
+        {
+            var task = _queuedTasks.FirstOrDefault(t => t.TaskId == taskId);
+            if (task == null)
+            {
+                return false;
+            }
+
+            _queuedTasks.Remove(task);
+            return true;
+        }
+    }
+
     public void CancelTask(Guid taskId)
     {
         lock (_lock)

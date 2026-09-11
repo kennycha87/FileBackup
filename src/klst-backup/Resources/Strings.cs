@@ -72,6 +72,8 @@ public static class Strings
 
     public static string Btn_Stop => Get(nameof(Btn_Stop));
 
+    public static string Btn_Dashboard => Get(nameof(Btn_Dashboard));
+
     public static string Btn_Browse => Get(nameof(Btn_Browse));
 
     public static string Btn_Restore => Get(nameof(Btn_Restore));

@@ -121,6 +121,9 @@
   <data name="Btn_Stop" xml:space="preserve">
     <value>停止</value>
   </data>
+  <data name="Btn_Dashboard" xml:space="preserve">
+    <value>任务面板</value>
+  </data>
   <data name="Btn_Browse" xml:space="preserve">
     <value>浏览…</value>
   </data>
