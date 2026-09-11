@@ -68,6 +68,7 @@ public sealed class PersistenceCultureTests : IDisposable
     // both non-trivial, while staying tiny enough that a run finishes in well under a second.
     private const int ExpectedFiles = 4;
     private const long ExpectedBytes = 27 + 14 + 2048 + 512;
+    private const int MaxAttempts = 5;
 
     private static readonly string[] ExpectedRelativePaths =
     {
@@ -637,6 +638,7 @@ public sealed class PersistenceCultureTests : IDisposable
     /// <summary>Everything one hostile run persisted, captured as raw text and raw file names.</summary>
     private sealed class HostileRun
     {
+        public required int Attempts { get; init; }
         public required string Culture { get; init; }
         public required BackupJob Job { get; init; }
         public required RunWindow Window { get; init; }
