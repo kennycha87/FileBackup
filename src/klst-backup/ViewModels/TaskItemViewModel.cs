@@ -23,13 +23,13 @@ public partial class TaskItemViewModel : ObservableObject
     private double _progressPercent;
 
     [ObservableProperty]
-    private string _progressText;
+    private string _progressText = string.Empty;
 
     [ObservableProperty]
-    private string _elapsedTime;
+    private string _elapsedTime = string.Empty;
 
     [ObservableProperty]
-    private string _currentFile;
+    private string _currentFile = string.Empty;
 
     [ObservableProperty]
     private bool _isPaused;
