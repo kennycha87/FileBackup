@@ -1,0 +1,104 @@
+<h2>Where should the Active Backup Task Dashboard live?</h2>
+<p class="subtitle">Consider visibility, accessibility, and workflow</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>New Tab in Main Window</h3>
+      <p>Add an "Active Tasks" tab alongside Jobs, History, Restore, and Settings. Users switch between tabs to see running backups.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Consistent with existing UI pattern</li>
+            <li>Easy to implement</li>
+            <li>Keeps main window clean</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Must switch tabs to see progress</li>
+            <li>Less visible when working in other tabs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Separate Floating Window</h3>
+      <p>Open a dedicated window that stays on top or floats independently. Can be minimized to system tray.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Always visible alongside main window</li>
+            <li>Can be moved/resized independently</li>
+            <li>Good for multi-monitor setups</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>More window management overhead</li>
+            <li>Can clutter the desktop</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Split View in Jobs Tab</h3>
+      <p>Add a collapsible/expandable panel at the bottom or side of the Jobs tab showing active tasks. Always visible when managing jobs.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Visible while managing jobs</li>
+            <li>No tab switching needed</li>
+            <li>Compact when collapsed</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Reduces space for job list</li>
+            <li>Only visible in Jobs tab</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="d" onclick="toggleSelect(this)">
+    <div class="letter">D</div>
+    <div class="content">
+      <h3>Notification Area / System Tray</h3>
+      <p>Show active task count in system tray icon. Click to expand a popup with task details and controls.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Always accessible from system tray</li>
+            <li>Minimal screen real estate</li>
+            <li>Works well with minimize-to-tray</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Limited space for detailed progress</li>
+            <li>Popup may feel less integrated</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
