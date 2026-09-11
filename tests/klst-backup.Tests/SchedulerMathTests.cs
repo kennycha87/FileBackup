@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using KlstBackup.Models;
 using KlstBackup.Services;
 using Xunit;
@@ -16,7 +17,7 @@ public class SchedulerMathTests
         return new BackupJob
         {
             ScheduleType = type,
-            Time = TimeOnly.Parse(time),
+            Time = TimeOnly.Parse(time, CultureInfo.InvariantCulture),
             WeekDay = weekDay,
             DayOfMonth = dayOfMonth,
             Enabled = true
@@ -172,8 +173,13 @@ public class SchedulerMathTests
     [Fact]
     public void Describe_Daily()
     {
-        var job = Job(ScheduleType.Daily, "02:00");
+        // Describe depends on CurrentUICulture after the localization work, so pin it. The
+        // expected en-US string is unchanged (the HH:mm time stays literal by design).
+        using (new CultureScope("en-US"))
+        {
+            var job = Job(ScheduleType.Daily, "02:00");
 
-        Assert.Equal("Daily at 02:00 (Full)", SchedulerMath.Describe(job));
+            Assert.Equal("Daily at 02:00 (Full)", SchedulerMath.Describe(job));
+        }
     }
 }

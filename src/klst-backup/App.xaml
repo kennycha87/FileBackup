@@ -1,6 +1,14 @@
 <Application x:Class="KlstBackup.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:KlstBackup.ViewModels">
     <Application.Resources>
+        <!-- Display-only localization converters, registered once at app level so both windows
+             and every DataGridColumn (which is not in the visual tree) can reach them.
+             No global font override: TextBlock is not a Control so a Control style would miss
+             most labels, and WPF's font fallback already resolves CJK glyphs. -->
+        <vm:UtcToLocalTextConverter  x:Key="UtcToLocalText" />
+        <vm:EnumDisplayNameConverter x:Key="EnumDisplayName" />
+        <vm:RunMessageConverter      x:Key="RunMessage" />
     </Application.Resources>
 </Application>

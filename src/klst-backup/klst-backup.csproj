@@ -12,6 +12,10 @@
     <Version>1.0.0</Version>
     <Product>File Backup</Product>
     <Description>Windows file backup application with full and differential backups.</Description>
+    <!-- Neutral (fallback) resources are en-US: Resources\Strings.resx carries no culture suffix.
+         SatelliteResourceLanguages bounds the build output to exactly these three locales. -->
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <SatelliteResourceLanguages>en-US;zh-HK;zh-CN</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>

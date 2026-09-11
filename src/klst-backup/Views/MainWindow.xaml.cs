@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Windows;
+using KlstBackup.Resources;
 using KlstBackup.Services;
 using KlstBackup.ViewModels;
 using WinForms = System.Windows.Forms;
@@ -25,13 +26,13 @@ public partial class MainWindow : Window
         _notifyIcon = new WinForms.NotifyIcon
         {
             Icon = AppIcon.CreateIcon(),
-            Text = "File Backup",
+            Text = Strings.Tray_Tooltip,
             Visible = true
         };
         var menu = new WinForms.ContextMenuStrip();
-        menu.Items.Add("Open", null, (_, _) => RestoreFromTray());
+        menu.Items.Add(Strings.Tray_Open, null, (_, _) => RestoreFromTray());
         menu.Items.Add(new WinForms.ToolStripSeparator());
-        menu.Items.Add("Exit", null, (_, _) =>
+        menu.Items.Add(Strings.Tray_Exit, null, (_, _) =>
         {
             _reallyExit = true;
             Close();
@@ -56,8 +57,8 @@ public partial class MainWindow : Window
             if (!_balloonShown)
             {
                 _balloonShown = true;
-                _notifyIcon.ShowBalloonTip(2500, "File Backup",
-                    "Still running in the system tray. Scheduled backups continue while the app runs.",
+                _notifyIcon.ShowBalloonTip(2500, Strings.App_Title,
+                    Strings.Tray_BalloonBody,
                     WinForms.ToolTipIcon.Info);
             }
 

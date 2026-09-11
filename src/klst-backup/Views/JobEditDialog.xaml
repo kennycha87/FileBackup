@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:KlstBackup.ViewModels"
-        Title="Backup Job"
+        xmlns:res="clr-namespace:KlstBackup.Resources"
+        Title="{x:Static res:Strings.Edit_Title}"
         Width="580" SizeToContent="Height"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
@@ -15,7 +16,7 @@
     <StackPanel Margin="16">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="130" />
+                <ColumnDefinition Width="Auto" MinWidth="130" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -31,57 +32,75 @@
             </Grid.RowDefinitions>
 
             <!-- Name -->
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Job name:" VerticalAlignment="Center" Margin="0,0,8,8" />
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static res:Strings.Edit_JobName}" VerticalAlignment="Center" Margin="0,0,8,8" />
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                      Margin="0,0,0,8" />
 
             <!-- Source -->
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Source folder:" VerticalAlignment="Center" Margin="0,0,8,8" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static res:Strings.Edit_SourceFolder}" VerticalAlignment="Center" Margin="0,0,8,8" />
             <DockPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,8">
-                <Button DockPanel.Dock="Right" Content="Browse..." Padding="10,3" Click="OnBrowseSource"
+                <Button DockPanel.Dock="Right" Content="{x:Static res:Strings.Btn_Browse}" Padding="10,3" Click="OnBrowseSource"
                         Margin="6,0,0,0" />
                 <TextBox Text="{Binding SourcePath, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center" />
             </DockPanel>
 
             <!-- Destination -->
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Destination:" VerticalAlignment="Center" Margin="0,0,8,8" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static res:Strings.Edit_Destination}" VerticalAlignment="Center" Margin="0,0,8,8" />
             <DockPanel Grid.Row="2" Grid.Column="1" Margin="0,0,0,8">
-                <Button DockPanel.Dock="Right" Content="Browse..." Padding="10,3" Click="OnBrowseDest"
+                <Button DockPanel.Dock="Right" Content="{x:Static res:Strings.Btn_Browse}" Padding="10,3" Click="OnBrowseDest"
                         Margin="6,0,0,0" />
                 <TextBox Text="{Binding DestPath, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center" />
             </DockPanel>
 
             <!-- Frequency -->
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="Frequency:" VerticalAlignment="Center" Margin="0,0,8,8" />
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static res:Strings.Edit_Frequency}" VerticalAlignment="Center" Margin="0,0,8,8" />
             <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,8">
-                <ComboBox x:Name="ScheduleCombo" Width="110" SelectedItem="{Binding ScheduleType}"
-                          SelectionChanged="OnScheduleTypeChanged" />
-                <ComboBox x:Name="WeekDayCombo" Width="110" Margin="8,0,0,0"
+                <ComboBox x:Name="ScheduleCombo" MinWidth="110" SelectedItem="{Binding ScheduleType}"
+                          SelectionChanged="OnScheduleTypeChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumDisplayName}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ComboBox x:Name="WeekDayCombo" MinWidth="110" Margin="8,0,0,0"
                           SelectedItem="{Binding WeekDay}"
-                          Visibility="{Binding ScheduleType, Converter={StaticResource EnumToVis}, ConverterParameter=Weekly}" />
+                          Visibility="{Binding ScheduleType, Converter={StaticResource EnumToVis}, ConverterParameter=Weekly}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumDisplayName}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <ComboBox x:Name="DayOfMonthCombo" Width="70" Margin="8,0,0,0"
                           SelectedItem="{Binding DayOfMonth}"
                           Visibility="{Binding ScheduleType, Converter={StaticResource EnumToVis}, ConverterParameter=Monthly}" />
-                <TextBlock Text="at" Margin="10,0,6,0" VerticalAlignment="Center"
-                           ToolTip="Local time of day (HH:mm)" />
+                <TextBlock Text="{x:Static res:Strings.Edit_At}" Margin="10,0,6,0" VerticalAlignment="Center"
+                           ToolTip="{x:Static res:Strings.Edit_AtToolTip}" />
                 <TextBox Width="60" Text="{Binding TimeText, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center" />
             </StackPanel>
 
             <!-- Type -->
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Backup type:" VerticalAlignment="Center" Margin="0,0,8,8" />
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{x:Static res:Strings.Edit_BackupType}" VerticalAlignment="Center" Margin="0,0,8,8" />
             <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,8">
-                <ComboBox x:Name="JobTypeCombo" Width="130" SelectedItem="{Binding JobType}" />
-                <TextBlock Text="Differential copies only files changed since the last full backup."
+                <ComboBox x:Name="JobTypeCombo" MinWidth="130" SelectedItem="{Binding JobType}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource EnumDisplayName}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="{x:Static res:Strings.Edit_DiffHint}"
                            Margin="10,0,0,0" VerticalAlignment="Center" Foreground="Gray" FontSize="11"
                            TextTrimming="CharacterEllipsis" MaxWidth="260"
-                           ToolTip="Differential copies only files changed since the last full backup." />
+                           ToolTip="{x:Static res:Strings.Edit_DiffHint}" />
             </StackPanel>
 
             <!-- Enabled -->
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="Enabled:" VerticalAlignment="Center" Margin="0,0,8,8" />
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="{x:Static res:Strings.Edit_Enabled}" VerticalAlignment="Center" Margin="0,0,8,8" />
             <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding Enabled}" VerticalAlignment="Center" Margin="0,0,0,8" />
 
             <!-- Error -->
@@ -91,8 +110,8 @@
             <!-- OK / Cancel -->
             <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                         HorizontalAlignment="Right" Margin="0,8,0,0">
-                <Button Content="OK" Width="84" Padding="0,4" IsDefault="True" Click="OnOk" Margin="0,0,8,0" />
-                <Button Content="Cancel" Width="84" Padding="0,4" IsCancel="True" />
+                <Button Content="{x:Static res:Strings.Btn_Ok}" MinWidth="84" Padding="12,4" IsDefault="True" Click="OnOk" Margin="0,0,8,0" />
+                <Button Content="{x:Static res:Strings.Btn_Cancel}" MinWidth="84" Padding="12,4" IsCancel="True" />
             </StackPanel>
         </Grid>
     </StackPanel>

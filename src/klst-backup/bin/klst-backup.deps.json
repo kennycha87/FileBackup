@@ -12,6 +12,14 @@
         },
         "runtime": {
           "klst-backup.dll": {}
+        },
+        "resources": {
+          "zh-CN/klst-backup.resources.dll": {
+            "locale": "zh-CN"
+          },
+          "zh-HK/klst-backup.resources.dll": {
+            "locale": "zh-HK"
+          }
         }
       },
       "CommunityToolkit.Mvvm/8.3.2": {

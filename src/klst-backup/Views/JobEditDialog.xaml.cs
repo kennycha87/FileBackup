@@ -1,4 +1,5 @@
 using System.Windows;
+using KlstBackup.Resources;
 using KlstBackup.ViewModels;
 
 namespace KlstBackup.Views;
@@ -22,7 +23,7 @@ public partial class JobEditDialog : Window
 
     private void OnBrowseSource(object sender, System.Windows.RoutedEventArgs e)
     {
-        var path = MainViewModel.BrowseForFolder("Select the source folder to back up");
+        var path = MainViewModel.BrowseForFolder(Strings.Msg_BrowseSource);
         if (path is not null)
         {
             ViewModel.SourcePath = path;
@@ -31,7 +32,7 @@ public partial class JobEditDialog : Window
 
     private void OnBrowseDest(object sender, System.Windows.RoutedEventArgs e)
     {
-        var path = MainViewModel.BrowseForFolder("Select the destination folder for backups");
+        var path = MainViewModel.BrowseForFolder(Strings.Msg_BrowseDest);
         if (path is not null)
         {
             ViewModel.DestPath = path;

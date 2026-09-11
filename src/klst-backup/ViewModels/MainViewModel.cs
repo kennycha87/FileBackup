@@ -6,6 +6,7 @@ using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using KlstBackup.Models;
+using KlstBackup.Resources;
 using KlstBackup.Services;
 using KlstBackup.Views;
 
@@ -32,7 +33,7 @@ public partial class MainViewModel : ObservableObject
     private bool _isBusy;
 
     [ObservableProperty]
-    private string _statusText = "Ready";
+    private string _statusText = Strings.Status_Ready;
 
     [ObservableProperty]
     private double _progressPercent;
@@ -44,6 +45,9 @@ public partial class MainViewModel : ObservableObject
     private bool _startWithWindows;
 
     [ObservableProperty]
+    private string? _language;
+
+    [ObservableProperty]
     private JobItemViewModel? _restoreJob;
 
     [ObservableProperty]
@@ -51,6 +55,18 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     private string _restoreTargetPath = string.Empty;
+
+    /// <summary>A row in the Settings language picker. <see cref="NativeName"/> is deliberately NOT
+    /// localized so a user can always find their own language regardless of the current UI language.</summary>
+    public sealed record LanguageOption(string? Tag, string NativeName);
+
+    public IReadOnlyList<LanguageOption> LanguageOptions { get; } = new[]
+    {
+        new LanguageOption(null, "Follow system / 跟隨系統"),
+        new LanguageOption("en-US", "English (United States)"),
+        new LanguageOption("zh-HK", "繁體中文（香港）"),
+        new LanguageOption("zh-CN", "简体中文（中国）"),
+    };
 
     public MainViewModel()
     {
@@ -65,6 +81,7 @@ public partial class MainViewModel : ObservableObject
         }
 
         StartWithWindows = StartupService.IsRegistered();
+        _language = _config.Language;
 
         _scheduler.JobStarting += OnSchedulerJobStarting;
         _scheduler.JobFinished += OnSchedulerJobFinished;
@@ -83,7 +100,7 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusText = "Failed to save configuration: " + ex.Message;
+            StatusText = string.Format(Strings.Status_ConfigSaveFailed, ex.Message);
         }
     }
 
@@ -110,8 +127,15 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusText = "Failed to update startup registration: " + ex.Message;
+            StatusText = string.Format(Strings.Status_StartupFailed, ex.Message);
         }
+    }
+
+    partial void OnLanguageChanged(string? value)
+    {
+        _config.Language = value;
+        SaveConfig();
+        StatusText = Strings.Status_LanguageRestartHint;
     }
 
     private void RefreshBackupSets()
@@ -158,7 +182,7 @@ public partial class MainViewModel : ObservableObject
                 IsBusy = true;
                 ProgressPercent = 0;
                 ProgressText = string.Empty;
-                StatusText = $"Scheduled backup started: {job.Name}";
+                StatusText = string.Format(Strings.Status_ScheduledStarted, job.Name);
             }
         });
     }
@@ -174,7 +198,7 @@ public partial class MainViewModel : ObservableObject
             if (scheduled)
             {
                 IsBusy = false;
-                StatusText = DescribeResult("Scheduled backup", job.Name, result);
+                StatusText = DescribeResult(Strings.Kind_Scheduled, job.Name, result);
             }
         });
     }
@@ -182,10 +206,11 @@ public partial class MainViewModel : ObservableObject
     private static string DescribeResult(string kind, string jobName, BackupResult result)
     {
         return result.Success
-            ? $"{kind} '{jobName}' completed: {result.FilesCopied} file(s), {BackupEngine.FormatBytes(result.BytesCopied)} ({result.SetFolder})."
+            ? string.Format(Strings.Status_BackupCompleted, kind, jobName, result.FilesCopied,
+                            BackupEngine.FormatBytes(result.BytesCopied), result.SetFolder)
             : result.Cancelled
-                ? $"{kind} '{jobName}' was cancelled."
-                : $"{kind} '{jobName}' failed: {result.Error}";
+                ? string.Format(Strings.Status_BackupCancelled, kind, jobName)
+                : string.Format(Strings.Status_BackupFailed, kind, jobName, result.Error);
     }
 
     // ----- Commands -----
@@ -205,7 +230,7 @@ public partial class MainViewModel : ObservableObject
             Jobs.Add(item);
             SaveConfig();
             SelectedJob = item;
-            StatusText = $"Job '{job.Name}' created.";
+            StatusText = string.Format(Strings.Status_JobCreated, job.Name);
         }
     }
 
@@ -227,7 +252,7 @@ public partial class MainViewModel : ObservableObject
             SelectedJob.Job.CopyEditableFrom(clone);
             SelectedJob.Refresh();
             SaveConfig();
-            StatusText = $"Job '{SelectedJob.Job.Name}' updated.";
+            StatusText = string.Format(Strings.Status_JobUpdated, SelectedJob.Job.Name);
         }
     }
 
@@ -241,8 +266,8 @@ public partial class MainViewModel : ObservableObject
 
         var jobName = SelectedJob.Job.Name;
         var confirm = MessageBox.Show(
-            $"Delete job '{jobName}'? Existing backup sets in the destination are kept.",
-            "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            string.Format(Strings.Msg_DeleteConfirm, jobName),
+            Strings.Msg_DeleteCaption, MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (confirm != MessageBoxResult.Yes)
         {
             return;
@@ -252,7 +277,7 @@ public partial class MainViewModel : ObservableObject
         Jobs.Remove(SelectedJob);
         SaveConfig();
         SelectedJob = Jobs.FirstOrDefault();
-        StatusText = $"Job '{jobName}' deleted.";
+        StatusText = string.Format(Strings.Status_JobDeleted, jobName);
     }
 
     [RelayCommand]
@@ -260,7 +285,7 @@ public partial class MainViewModel : ObservableObject
     {
         if (SelectedJob is null)
         {
-            StatusText = "Select a job first.";
+            StatusText = Strings.Status_SelectJobFirst;
             return;
         }
 
@@ -271,44 +296,51 @@ public partial class MainViewModel : ObservableObject
     private void StopRun()
     {
         _scheduler.CancelCurrent();
-        StatusText = "Stopping current backup...";
+        StatusText = Strings.Status_Stopping;
     }
 
     private async void StartRun(BackupJob job)
     {
         if (IsBusy)
         {
-            MessageBox.Show("Another backup is already running.", "File Backup",
+            MessageBox.Show(Strings.Msg_Busy, Strings.Msg_Caption,
                 MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
 
         IsBusy = true;
-        StatusText = $"Backing up '{job.Name}'...";
+        StatusText = string.Format(Strings.Status_BackingUp, job.Name);
         ProgressPercent = 0;
         ProgressText = string.Empty;
+        // Hoisted out of the per-file handler: ResourceManager.GetString runs once per run, never once
+        // per copied file. No resource lookup and no CultureInfo allocation inside the lambda.
+        var progressTemplate = Strings.Status_ProgressFiles;
         var progress = new Progress<BackupProgress>(p =>
         {
             ProgressPercent = p.TotalFiles > 0 ? p.FilesDone * 100.0 / p.TotalFiles : 0;
-            ProgressText = $"{p.FilesDone}/{p.TotalFiles} files - {BackupEngine.FormatBytes(p.BytesCopied)} - {p.CurrentFile}";
+            ProgressText = string.Format(progressTemplate, p.FilesDone, p.TotalFiles,
+                                         BackupEngine.FormatBytes(p.BytesCopied), p.CurrentFile);
         });
 
         try
         {
             var result = await Task.Run(() => _scheduler.RunJob(job, scheduled: false, progress));
-            StatusText = DescribeResult("Backup", job.Name, result);
+            StatusText = DescribeResult(Strings.Kind_Manual, job.Name, result);
             if (result.Success)
             {
                 ProgressPercent = 100;
             }
         }
-        catch (InvalidOperationException ex)
+        catch (InvalidOperationException)
         {
-            StatusText = ex.Message;
+            // The only InvalidOperationException reachable here is the "another backup is already
+            // running" guard (IsBusy is pre-checked above). Show the localized string; the exception
+            // message stays an untranslated developer diagnostic - do not localize the throw site.
+            StatusText = Strings.Msg_Busy;
         }
         catch (Exception ex)
         {
-            StatusText = "Backup error: " + ex.Message;
+            StatusText = string.Format(Strings.Status_BackupError, ex.Message);
         }
         finally
         {
@@ -321,7 +353,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void BrowseRestoreTarget()
     {
-        var path = BrowseForFolder("Select the folder to restore into");
+        var path = BrowseForFolder(Strings.Msg_BrowseRestoreTarget);
         if (path is not null)
         {
             RestoreTargetPath = path;
@@ -333,21 +365,21 @@ public partial class MainViewModel : ObservableObject
     {
         if (RestoreJob is null || SelectedBackupSet is null)
         {
-            MessageBox.Show("Select a job and a backup set first.", "File Backup",
+            MessageBox.Show(Strings.Msg_RestoreSelectFirst, Strings.Msg_Caption,
                 MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(RestoreTargetPath))
         {
-            MessageBox.Show("Choose the folder to restore into.", "File Backup",
+            MessageBox.Show(Strings.Msg_RestorePickFolder, Strings.Msg_Caption,
                 MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
 
         if (IsBusy)
         {
-            MessageBox.Show("Another operation is already running.", "File Backup",
+            MessageBox.Show(Strings.Msg_OperationBusy, Strings.Msg_Caption,
                 MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
@@ -358,13 +390,15 @@ public partial class MainViewModel : ObservableObject
     private async void StartRestore(BackupJob job, string setName, string targetPath)
     {
         IsBusy = true;
-        StatusText = $"Restoring '{setName}'...";
+        StatusText = string.Format(Strings.Status_Restoring, setName);
         ProgressPercent = 0;
         ProgressText = string.Empty;
+        // Hoisted out of the per-file handler (see StartRun): one lookup per restore, not per file.
+        var progressTemplate = Strings.Status_ProgressRestore;
         var progress = new Progress<BackupProgress>(p =>
         {
             ProgressPercent = p.TotalFiles > 0 ? p.FilesDone * 100.0 / p.TotalFiles : 0;
-            ProgressText = $"{p.FilesDone}/{p.TotalFiles} files - {p.CurrentFile}";
+            ProgressText = string.Format(progressTemplate, p.FilesDone, p.TotalFiles, p.CurrentFile);
         });
 
         try
@@ -372,10 +406,11 @@ public partial class MainViewModel : ObservableObject
             var result = await Task.Run(() => App.Engine.RestoreBackup(
                 job.Id, job.DestPath, setName, targetPath, progress, CancellationToken.None, null));
             StatusText = result.Success
-                ? $"Restore completed: {result.FilesRestored} file(s), {BackupEngine.FormatBytes(result.BytesRestored)}."
+                ? string.Format(Strings.Status_RestoreCompleted, result.FilesRestored,
+                                BackupEngine.FormatBytes(result.BytesRestored))
                 : result.Cancelled
-                    ? "Restore was cancelled."
-                    : "Restore failed: " + result.Error;
+                    ? Strings.Status_RestoreCancelled
+                    : string.Format(Strings.Status_RestoreFailed, result.Error);
             if (result.Success)
             {
                 ProgressPercent = 100;
@@ -383,7 +418,7 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusText = "Restore error: " + ex.Message;
+            StatusText = string.Format(Strings.Status_RestoreError, ex.Message);
         }
         finally
         {
