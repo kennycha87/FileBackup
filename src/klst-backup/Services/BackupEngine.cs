@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -44,7 +45,7 @@ public class BackupEngine
             }
 
             var prefix = type == BackupType.Full ? "Full_" : "Diff_";
-            var setName = prefix + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            var setName = prefix + DateTime.Now.ToString("yyyyMMdd_HHmmss", CultureInfo.InvariantCulture);
 
             if (type == BackupType.Full)
             {
@@ -385,11 +386,13 @@ public class BackupEngine
             : path;
     }
 
+    /// <summary>Renders a byte count for display. Pinned to the invariant culture because the
+    /// result is echoed verbatim into the run log files.</summary>
     public static string FormatBytes(long bytes) => bytes switch
     {
-        >= 1L << 30 => $"{bytes / 1073741824.0:0.00} GB",
-        >= 1L << 20 => $"{bytes / 1048576.0:0.00} MB",
-        >= 1L << 10 => $"{bytes / 1024.0:0.00} KB",
+        >= 1L << 30 => string.Format(CultureInfo.InvariantCulture, "{0:0.00} GB", bytes / 1073741824.0),
+        >= 1L << 20 => string.Format(CultureInfo.InvariantCulture, "{0:0.00} MB", bytes / 1048576.0),
+        >= 1L << 10 => string.Format(CultureInfo.InvariantCulture, "{0:0.00} KB", bytes / 1024.0),
         _ => $"{bytes} B"
     };
 }

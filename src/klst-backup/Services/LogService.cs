@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -16,9 +17,12 @@ public sealed class RunLog : IDisposable
     {
         try
         {
-            var dir = Path.Combine(logRoot, DateTime.Now.ToString("yyyyMM"));
+            // Persisted log paths and timestamps are pinned to the invariant culture so that
+            // log folders sort chronologically under every regional format and calendar.
+            var dir = Path.Combine(logRoot, DateTime.Now.ToString("yyyyMM", CultureInfo.InvariantCulture));
             Directory.CreateDirectory(dir);
-            FilePath = Path.Combine(dir, $"{Sanitize(name)}_{DateTime.Now:yyyyMMdd_HHmmss}.log");
+            FilePath = Path.Combine(dir,
+                $"{Sanitize(name)}_{DateTime.Now.ToString("yyyyMMdd_HHmmss", CultureInfo.InvariantCulture)}.log");
             _writer = new StreamWriter(FilePath, append: false, Encoding.UTF8);
         }
         catch
@@ -44,7 +48,8 @@ public sealed class RunLog : IDisposable
         {
             try
             {
-                _writer.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} {level} {message}");
+                _writer.WriteLine(
+                    $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)} {level} {message}");
                 _writer.Flush();
             }
             catch
@@ -110,8 +115,10 @@ public class LogService
     {
         try
         {
-            var path = Path.Combine(_root, $"app_{DateTime.Now:yyyyMMdd}.log");
-            File.AppendAllText(path, $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} {message}{Environment.NewLine}");
+            var path = Path.Combine(_root,
+                $"app_{DateTime.Now.ToString("yyyyMMdd", CultureInfo.InvariantCulture)}.log");
+            File.AppendAllText(path,
+                $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)} {message}{Environment.NewLine}");
         }
         catch
         {

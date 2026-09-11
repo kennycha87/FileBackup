@@ -1,6 +1,7 @@
 using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using KlstBackup.Models;
+using KlstBackup.Resources;
 using KlstBackup.Services;
 
 namespace KlstBackup.ViewModels;
@@ -26,9 +27,9 @@ public partial class JobItemViewModel : ObservableObject
 
     public string DestPath => Job.DestPath;
 
-    public string JobType => Job.JobType == BackupType.Full ? "Full" : "Differential";
+    public string JobType => Job.JobType == BackupType.Full ? Strings.Enum_BackupType_Full : Strings.Enum_BackupType_Differential;
 
-    public string LastRunText => Job.LastRunUtc?.ToLocalTime().ToString("yyyy-MM-dd HH:mm") ?? "Never";
+    public string LastRunText => Job.LastRunUtc is { } t ? TimeFormatter.UtcShort(t) : Strings.Common_Never;
 
     public string NextRunText
     {
@@ -41,10 +42,10 @@ public partial class JobItemViewModel : ObservableObject
 
             if (SchedulerMath.IsDue(Job, DateTime.Now))
             {
-                return "Due now";
+                return Strings.Common_DueNow;
             }
 
-            return SchedulerMath.ComputeNextRun(Job, DateTime.Now).ToString("yyyy-MM-dd HH:mm");
+            return TimeFormatter.Short(SchedulerMath.ComputeNextRun(Job, DateTime.Now));
         }
     }
 

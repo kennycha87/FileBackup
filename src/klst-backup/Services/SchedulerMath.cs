@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using KlstBackup.Models;
+using KlstBackup.Resources;
 
 namespace KlstBackup.Services;
 
@@ -123,15 +125,23 @@ public static class SchedulerMath
         }
     }
 
-    /// <summary>Human readable description of the job's schedule, e.g. "Daily at 02:00 (Full)".</summary>
+    /// <summary>Human readable description of the job's schedule, e.g. "Daily at 02:00 (Full)".
+    /// Localized via the <c>Schedule_*</c> resources; the weekday name comes from the current UI
+    /// culture. The time stays the literal <c>HH:mm</c> the user types (see <c>Edit_AtToolTip</c>),
+    /// so display and input agree. <c>SchedulerMathTests.Describe_Daily</c> asserts the exact en-US
+    /// output. Stays static and I/O-free.</summary>
     public static string Describe(BackupJob job)
     {
-        var typeText = job.JobType == BackupType.Full ? "Full" : "Differential";
+        var typeText = job.JobType == BackupType.Full
+            ? Strings.Enum_BackupType_Full : Strings.Enum_BackupType_Differential;
+        var time = TimeFormatter.FormatTime(job.Time);
         return job.ScheduleType switch
         {
-            ScheduleType.Daily => $"Daily at {job.Time:HH:mm} ({typeText})",
-            ScheduleType.Weekly => $"Every {job.WeekDay ?? DayOfWeek.Monday} at {job.Time:HH:mm} ({typeText})",
-            ScheduleType.Monthly => $"Monthly on day {job.DayOfMonth} at {job.Time:HH:mm} ({typeText})",
+            ScheduleType.Daily => string.Format(Strings.Schedule_DailyAt, time, typeText),
+            ScheduleType.Weekly => string.Format(Strings.Schedule_WeeklyAt,
+                CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(job.WeekDay ?? DayOfWeek.Monday),
+                time, typeText),
+            ScheduleType.Monthly => string.Format(Strings.Schedule_MonthlyAt, job.DayOfMonth, time, typeText),
             _ => typeText
         };
     }

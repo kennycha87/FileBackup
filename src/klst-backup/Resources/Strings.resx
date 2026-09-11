@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Neutral resources = en-US (declared by <NeutralLanguage>en-US</NeutralLanguage> in the csproj).
+    This file carries no culture suffix on purpose: it is the fallback every other locale
+    inherits from, and unsupported display languages resolve here automatically.
+
+    Every value below is copied verbatim from the literal it replaces so the en-US UI stays
+    byte-identical. Placeholders {0}, {1}, ... must keep their ordinals in all three locales.
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- ===== Application / branding ===== -->
+  <data name="App_Title" xml:space="preserve">
+    <value>File Backup</value>
+  </data>
+  <data name="Msg_Caption" xml:space="preserve">
+    <value>File Backup</value>
+  </data>
+
+  <!-- ===== System tray ===== -->
+  <data name="Tray_Tooltip" xml:space="preserve">
+    <value>File Backup</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Tray_BalloonBody" xml:space="preserve">
+    <value>Still running in the system tray. Scheduled backups continue while the app runs.</value>
+  </data>
+
+  <!-- ===== Tabs ===== -->
+  <data name="Tab_Jobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
+  <data name="Tab_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Tab_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+
+  <!-- ===== Buttons ===== -->
+  <data name="Btn_New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Btn_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Btn_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Btn_RunNow" xml:space="preserve">
+    <value>Run Now</value>
+  </data>
+  <data name="Btn_Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Btn_Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="Btn_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Btn_Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Btn_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+
+  <!-- ===== Job detail labels (trailing colons are part of the value) ===== -->
+  <data name="Detail_Source" xml:space="preserve">
+    <value>Source:</value>
+  </data>
+  <data name="Detail_Destination" xml:space="preserve">
+    <value>Destination:</value>
+  </data>
+  <data name="Detail_BackupType" xml:space="preserve">
+    <value>Backup type:</value>
+  </data>
+  <data name="Detail_NextRun" xml:space="preserve">
+    <value>Next run:</value>
+  </data>
+  <data name="Detail_LastRun" xml:space="preserve">
+    <value>Last run:</value>
+  </data>
+  <data name="Detail_Enabled" xml:space="preserve">
+    <value>Enabled:</value>
+  </data>
+
+  <!-- ===== History grid columns ===== -->
+  <data name="Col_Job" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="Col_StartedLocal" xml:space="preserve">
+    <value>Started (local)</value>
+  </data>
+  <data name="Col_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Col_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Col_Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Col_Bytes" xml:space="preserve">
+    <value>Bytes</value>
+  </data>
+  <data name="Col_Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Col_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+
+  <!-- ===== Shared short values ===== -->
+  <data name="Common_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Common_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Common_Never" xml:space="preserve">
+    <value>Never</value>
+  </data>
+  <data name="Common_DueNow" xml:space="preserve">
+    <value>Due now</value>
+  </data>
+
+  <!-- ===== Help paragraphs ===== -->
+  <data name="Hint_Differential" xml:space="preserve">
+    <value>Differential runs copy only files changed since the last full backup. When no full backup exists yet, the first run is performed as a full backup.</value>
+  </data>
+  <data name="Hint_Restore" xml:space="preserve">
+    <value>For a differential set, the base full backup is restored first and the differential files are applied on top, so the target ends up with the files as they were at the time of that differential run.</value>
+  </data>
+  <data name="Hint_Tray" xml:space="preserve">
+    <value>The application keeps running in the system tray after you close the window. Scheduled backups only run while the application is running, so starting it with Windows is recommended.</value>
+  </data>
+  <data name="Hint_AppData" xml:space="preserve">
+    <value>Run history and per-run logs are stored in %APPDATA%\FileBackup. Each backup set folder contains a manifest.json describing the files captured by that run.</value>
+  </data>
+
+  <!-- ===== Restore tab ===== -->
+  <data name="Restore_Heading" xml:space="preserve">
+    <value>Restore a backup set to a folder</value>
+  </data>
+  <data name="Restore_Job" xml:space="preserve">
+    <value>Job:</value>
+  </data>
+  <data name="Restore_BackupSet" xml:space="preserve">
+    <value>Backup set (newest first):</value>
+  </data>
+  <data name="Restore_TargetFolder" xml:space="preserve">
+    <value>Restore into folder:</value>
+  </data>
+
+  <!-- ===== Job edit dialog ===== -->
+  <data name="Edit_Title" xml:space="preserve">
+    <value>Backup Job</value>
+  </data>
+  <data name="Edit_JobName" xml:space="preserve">
+    <value>Job name:</value>
+  </data>
+  <data name="Edit_SourceFolder" xml:space="preserve">
+    <value>Source folder:</value>
+  </data>
+  <data name="Edit_Destination" xml:space="preserve">
+    <value>Destination:</value>
+  </data>
+  <data name="Edit_Frequency" xml:space="preserve">
+    <value>Frequency:</value>
+  </data>
+  <data name="Edit_At" xml:space="preserve">
+    <value>at</value>
+  </data>
+  <data name="Edit_AtToolTip" xml:space="preserve">
+    <value>Local time of day (HH:mm)</value>
+  </data>
+  <data name="Edit_BackupType" xml:space="preserve">
+    <value>Backup type:</value>
+  </data>
+  <data name="Edit_DiffHint" xml:space="preserve">
+    <value>Differential copies only files changed since the last full backup.</value>
+  </data>
+  <data name="Edit_Enabled" xml:space="preserve">
+    <value>Enabled:</value>
+  </data>
+
+  <!-- ===== Edit dialog validation errors ===== -->
+  <data name="Err_NameRequired" xml:space="preserve">
+    <value>Please enter a job name.</value>
+  </data>
+  <data name="Err_SourceMissing" xml:space="preserve">
+    <value>The source folder does not exist.</value>
+  </data>
+  <data name="Err_DestRequired" xml:space="preserve">
+    <value>Please choose a destination folder.</value>
+  </data>
+  <data name="Err_TimeFormat" xml:space="preserve">
+    <value>Time must use the HH:mm format, e.g. 02:30.</value>
+  </data>
+
+  <!-- ===== Run kind (subject of the completion sentences) ===== -->
+  <data name="Kind_Scheduled" xml:space="preserve">
+    <value>Scheduled backup</value>
+  </data>
+  <data name="Kind_Manual" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+
+  <!-- ===== Status bar ===== -->
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="Status_ConfigSaveFailed" xml:space="preserve">
+    <value>Failed to save configuration: {0}</value>
+  </data>
+  <data name="Status_StartupFailed" xml:space="preserve">
+    <value>Failed to update startup registration: {0}</value>
+  </data>
+  <data name="Status_ScheduledStarted" xml:space="preserve">
+    <value>Scheduled backup started: {0}</value>
+  </data>
+  <data name="Status_BackupCompleted" xml:space="preserve">
+    <value>{0} '{1}' completed: {2} file(s), {3} ({4}).</value>
+  </data>
+  <data name="Status_BackupCancelled" xml:space="preserve">
+    <value>{0} '{1}' was cancelled.</value>
+  </data>
+  <data name="Status_BackupFailed" xml:space="preserve">
+    <value>{0} '{1}' failed: {2}</value>
+  </data>
+  <data name="Status_JobCreated" xml:space="preserve">
+    <value>Job '{0}' created.</value>
+  </data>
+  <data name="Status_JobUpdated" xml:space="preserve">
+    <value>Job '{0}' updated.</value>
+  </data>
+  <data name="Status_JobDeleted" xml:space="preserve">
+    <value>Job '{0}' deleted.</value>
+  </data>
+  <data name="Status_SelectJobFirst" xml:space="preserve">
+    <value>Select a job first.</value>
+  </data>
+  <data name="Status_Stopping" xml:space="preserve">
+    <value>Stopping current backup...</value>
+  </data>
+  <data name="Status_BackingUp" xml:space="preserve">
+    <value>Backing up '{0}'...</value>
+  </data>
+  <data name="Status_BackupError" xml:space="preserve">
+    <value>Backup error: {0}</value>
+  </data>
+  <data name="Status_ProgressFiles" xml:space="preserve">
+    <value>{0}/{1} files - {2} - {3}</value>
+  </data>
+  <data name="Status_Restoring" xml:space="preserve">
+    <value>Restoring '{0}'...</value>
+  </data>
+  <data name="Status_ProgressRestore" xml:space="preserve">
+    <value>{0}/{1} files - {2}</value>
+  </data>
+  <data name="Status_RestoreCompleted" xml:space="preserve">
+    <value>Restore completed: {0} file(s), {1}.</value>
+  </data>
+  <data name="Status_RestoreCancelled" xml:space="preserve">
+    <value>Restore was cancelled.</value>
+  </data>
+  <data name="Status_RestoreFailed" xml:space="preserve">
+    <value>Restore failed: {0}</value>
+  </data>
+  <data name="Status_RestoreError" xml:space="preserve">
+    <value>Restore error: {0}</value>
+  </data>
+  <data name="Status_LanguageRestartHint" xml:space="preserve">
+    <value>Language saved. Restart the application to apply it.</value>
+  </data>
+
+  <!-- ===== Message boxes and folder browser prompts ===== -->
+  <data name="Msg_DeleteConfirm" xml:space="preserve">
+    <value>Delete job '{0}'? Existing backup sets in the destination are kept.</value>
+  </data>
+  <data name="Msg_DeleteCaption" xml:space="preserve">
+    <value>Confirm delete</value>
+  </data>
+  <data name="Msg_Busy" xml:space="preserve">
+    <value>Another backup is already running.</value>
+  </data>
+  <data name="Msg_RestoreSelectFirst" xml:space="preserve">
+    <value>Select a job and a backup set first.</value>
+  </data>
+  <data name="Msg_RestorePickFolder" xml:space="preserve">
+    <value>Choose the folder to restore into.</value>
+  </data>
+  <data name="Msg_OperationBusy" xml:space="preserve">
+    <value>Another operation is already running.</value>
+  </data>
+  <data name="Msg_BrowseRestoreTarget" xml:space="preserve">
+    <value>Select the folder to restore into</value>
+  </data>
+  <data name="Msg_BrowseSource" xml:space="preserve">
+    <value>Select the source folder to back up</value>
+  </data>
+  <data name="Msg_BrowseDest" xml:space="preserve">
+    <value>Select the destination folder for backups</value>
+  </data>
+
+  <!-- ===== Schedule descriptions. {0}/{1}/{2} ordinals differ per pattern on purpose:
+           DailyAt   {0}=time,     {1}=backup type
+           WeeklyAt  {0}=weekday,  {1}=time, {2}=backup type
+           MonthlyAt {0}=day of month, {1}=time, {2}=backup type
+           The time is always the literal HH:mm the user typed (see Edit_AtToolTip). ===== -->
+  <data name="Schedule_DailyAt" xml:space="preserve">
+    <value>Daily at {0} ({1})</value>
+  </data>
+  <data name="Schedule_WeeklyAt" xml:space="preserve">
+    <value>Every {0} at {1} ({2})</value>
+  </data>
+  <data name="Schedule_MonthlyAt" xml:space="preserve">
+    <value>Monthly on day {0} at {1} ({2})</value>
+  </data>
+
+  <!-- ===== Settings tab ===== -->
+  <data name="Settings_StartWithWindows" xml:space="preserve">
+    <value>Start File Backup when Windows starts</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+
+  <!-- ===== Enum display names, keyed Enum_<TypeName>_<MemberName> so
+           EnumDisplayNameConverter can build them dynamically. The members themselves
+           stay English on disk (JsonStringEnumConverter); only the display is localized. ===== -->
+  <data name="Enum_BackupType_Full" xml:space="preserve">
+    <value>Full</value>
+  </data>
+  <data name="Enum_BackupType_Differential" xml:space="preserve">
+    <value>Differential</value>
+  </data>
+  <data name="Enum_ScheduleType_Daily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="Enum_ScheduleType_Weekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="Enum_ScheduleType_Monthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="Enum_RunStatus_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Enum_RunStatus_CompletedWithWarnings" xml:space="preserve">
+    <value>Completed with warnings</value>
+  </data>
+  <data name="Enum_RunStatus_Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Enum_RunStatus_Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+</root>

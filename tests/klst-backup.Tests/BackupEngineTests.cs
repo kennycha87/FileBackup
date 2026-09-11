@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using KlstBackup.Models;
@@ -7,12 +8,26 @@ using Xunit;
 
 namespace KlstBackup.Tests;
 
+/// <summary>
+/// Shares the <c>ManifestStoreRoot</c> collection with every other test class that touches the
+/// static, hard-coded <c>%APPDATA%\FileBackup\sets</c> root, so those classes run sequentially
+/// relative to each other instead of racing (xUnit parallelizes test classes by default).
+/// Unrelated classes keep running in parallel.
+/// </summary>
+[Collection("ManifestStoreRoot")]
 public class BackupEngineTests : IDisposable
 {
     private readonly string _root;
     private readonly string _source;
     private readonly string _dest;
     private readonly BackupEngine _engine = new();
+
+    /// <summary>
+    /// Every job id this test instance handed to the engine, i.e. the complete set of
+    /// <c>%APPDATA%\FileBackup\sets\&lt;jobId&gt;</c> folders it may have caused to be created.
+    /// <see cref="Dispose"/> removes exactly these and nothing else.
+    /// </summary>
+    private readonly List<Guid> _createdJobIds = new();
 
     public BackupEngineTests()
     {
@@ -34,17 +49,30 @@ public class BackupEngineTests : IDisposable
             // ignore cleanup failures
         }
 
-        // Clean up AppData manifests created during tests
+        // Remove ONLY the per-job manifest folders this test instance created. The sets root is
+        // shared with the production ManifestStore, which stores real users' manifests there, so
+        // enumerating and deleting every directory under it (what this cleanup used to do) wipes
+        // real user data on any machine that also runs the app - and, because xUnit parallelizes
+        // test classes, deletes the manifests other test classes are mid-assertion on.
+        // Never touch the root itself or any folder this instance did not mint.
         try
         {
             var appDataSets = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 "FileBackup", "sets");
-            if (Directory.Exists(appDataSets))
+            foreach (var jobId in _createdJobIds)
             {
-                foreach (var dir in Directory.GetDirectories(appDataSets))
+                try
                 {
-                    try { Directory.Delete(dir, recursive: true); } catch { }
+                    var own = Path.Combine(appDataSets, jobId.ToString("N"));
+                    if (Directory.Exists(own))
+                    {
+                        Directory.Delete(own, recursive: true);
+                    }
+                }
+                catch
+                {
+                    // ignore cleanup failures
                 }
             }
         }
@@ -54,13 +82,23 @@ public class BackupEngineTests : IDisposable
         }
     }
 
-    private BackupJob Job(BackupType type = BackupType.Full) => new()
+    /// <summary>
+    /// Mints a job and records its id so <see cref="Dispose"/> can clean up exactly that job's
+    /// shared-root manifest folder. Always use this instead of <c>new BackupJob()</c> so no folder
+    /// is orphaned under <c>%APPDATA%\FileBackup\sets</c>.
+    /// </summary>
+    private BackupJob Register(BackupType type = BackupType.Full)
     {
-        Name = "TestJob",
-        SourcePath = _source,
-        DestPath = _dest,
-        JobType = type
-    };
+        var job = new BackupJob
+        {
+            Name = "TestJob",
+            SourcePath = _source,
+            DestPath = _dest,
+            JobType = type
+        };
+        _createdJobIds.Add(job.Id);
+        return job;
+    }
 
     private void CreateFile(string relativePath, byte[] content, DateTime? lastWrite = null)
     {
@@ -82,7 +120,7 @@ public class BackupEngineTests : IDisposable
         CreateFile("sub/b.txt", new byte[2048]);
         CreateFile("sub2/deep/c.bin", new byte[1024]);
 
-        var job = Job();
+        var job = Register();
         var result = _engine.RunBackup(job, BackupType.Full, null, CancellationToken.None, null);
 
         Assert.True(result.Success, result.Error);
@@ -106,7 +144,7 @@ public class BackupEngineTests : IDisposable
         var mtime = new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc);
         CreateFile("a.txt", "hello"u8.ToArray(), mtime);
 
-        var result = _engine.RunBackup(Job(), BackupType.Full, null, CancellationToken.None, null);
+        var result = _engine.RunBackup(Register(), BackupType.Full, null, CancellationToken.None, null);
         Assert.True(result.Success, result.Error);
 
         var copied = new FileInfo(Path.Combine(_dest, "a.txt"));
@@ -123,7 +161,7 @@ public class BackupEngineTests : IDisposable
         CreateFile("unchanged.txt", "same"u8.ToArray(), originalMtime);
         CreateFile("sub/b.txt", new byte[512], originalMtime);
 
-        var job = Job();
+        var job = Register();
         var full = _engine.RunBackup(job, BackupType.Full, null, CancellationToken.None, null);
         Assert.True(full.Success, full.Error);
 
@@ -151,7 +189,7 @@ public class BackupEngineTests : IDisposable
     {
         CreateFile("a.txt", "hello"u8.ToArray());
 
-        var result = _engine.RunBackup(Job(), BackupType.Differential, null, CancellationToken.None, null);
+        var result = _engine.RunBackup(Register(), BackupType.Differential, null, CancellationToken.None, null);
 
         Assert.True(result.Success, result.Error);
         Assert.Equal(BackupType.Full, result.Type);
@@ -163,7 +201,7 @@ public class BackupEngineTests : IDisposable
     public void Differential_UsesLatestFullSet()
     {
         CreateFile("a.txt", "v1"u8.ToArray());
-        var job = Job();
+        var job = Register();
         var full1 = _engine.RunBackup(job, BackupType.Full, null, CancellationToken.None, null);
         Thread.Sleep(1100); // set names have second resolution
         CreateFile("a.txt", "v2"u8.ToArray());
@@ -191,7 +229,7 @@ public class BackupEngineTests : IDisposable
         using var cts = new CancellationTokenSource();
         cts.Cancel();
 
-        var result = _engine.RunBackup(Job(), BackupType.Full, null, cts.Token, null);
+        var result = _engine.RunBackup(Register(), BackupType.Full, null, cts.Token, null);
 
         Assert.True(result.Cancelled);
         Assert.False(result.Success);
@@ -202,11 +240,15 @@ public class BackupEngineTests : IDisposable
     [Fact]
     public void MissingSource_FailsWithMessage()
     {
-        var job = Job();
+        var job = Register();
         job.SourcePath = Path.Combine(_root, "does_not_exist");
 
         var result = _engine.RunBackup(job, BackupType.Full, null, CancellationToken.None, null);
 
+        // This assertion stays green under every UI language because BackupEngine's exception
+        // messages are deliberately never localized: they are persisted into RunRecord.Message
+        // and written to the cross-machine log files, where translating them would corrupt
+        // stored data and make logs unsearchable. Do not "helpfully" translate the throw site.
         Assert.False(result.Success);
         Assert.Contains("Source folder not found", result.Error);
     }
@@ -218,7 +260,7 @@ public class BackupEngineTests : IDisposable
     {
         CreateFile("a.txt", "hello"u8.ToArray());
         CreateFile("sub/b.txt", new byte[100]);
-        var job = Job();
+        var job = Register();
         var full = _engine.RunBackup(job, BackupType.Full, null, CancellationToken.None, null);
 
         var target = Path.Combine(_root, "restore_full");
@@ -236,7 +278,7 @@ public class BackupEngineTests : IDisposable
     {
         CreateFile("a.txt", "v1"u8.ToArray());
         CreateFile("b.txt", "keep"u8.ToArray());
-        var job = Job();
+        var job = Register();
         var full = _engine.RunBackup(job, BackupType.Full, null, CancellationToken.None, null);
         // explicit mtime so the change is unambiguous even if both writes land in the same timestamp tick
         CreateFile("a.txt", "v2"u8.ToArray(), new DateTime(2024, 5, 2, 0, 0, 0, DateTimeKind.Utc));
@@ -264,8 +306,13 @@ public class BackupEngineTests : IDisposable
     [Fact]
     public void FormatBytes_IsReadable()
     {
-        Assert.Equal("0 B", BackupEngine.FormatBytes(0));
-        Assert.Equal("1.00 KB", BackupEngine.FormatBytes(1024));
-        Assert.Equal("1.00 MB", BackupEngine.FormatBytes(1024 * 1024));
+        // FormatBytes is pinned to InvariantCulture (its output is echoed into log files); the
+        // scope is for explicitness only - these values must hold under any ambient culture.
+        using (new CultureScope("en-US"))
+        {
+            Assert.Equal("0 B", BackupEngine.FormatBytes(0));
+            Assert.Equal("1.00 KB", BackupEngine.FormatBytes(1024));
+            Assert.Equal("1.00 MB", BackupEngine.FormatBytes(1024 * 1024));
+        }
     }
 }

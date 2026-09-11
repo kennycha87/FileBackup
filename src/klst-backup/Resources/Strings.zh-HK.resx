@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    zh-HK satellite = Traditional Chinese as displayed on Windows with the
+    Hong Kong SAR display language. The culture code MUST be exactly "zh-HK":
+    ResourceManager probes CurrentUICulture.Name, and Windows yields "zh-HK",
+    never "zh-Hant-HK".
+
+    Same key set and same {n} placeholder ordinals as Strings.resx.
+    Brand name "File Backup" and the tokens HH:mm, 02:30, %APPDATA%\FileBackup
+    and manifest.json stay verbatim.
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- ===== Application / branding ===== -->
+  <data name="App_Title" xml:space="preserve">
+    <value>File Backup</value>
+  </data>
+  <data name="Msg_Caption" xml:space="preserve">
+    <value>File Backup</value>
+  </data>
+
+  <!-- ===== System tray ===== -->
+  <data name="Tray_Tooltip" xml:space="preserve">
+    <value>File Backup</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>開啟</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>結束</value>
+  </data>
+  <data name="Tray_BalloonBody" xml:space="preserve">
+    <value>程式仍在系統匣中執行。只要程式保持開啟，排程備份就會繼續進行。</value>
+  </data>
+
+  <!-- ===== Tabs ===== -->
+  <data name="Tab_Jobs" xml:space="preserve">
+    <value>備份作業</value>
+  </data>
+  <data name="Tab_History" xml:space="preserve">
+    <value>歷史記錄</value>
+  </data>
+  <data name="Tab_Restore" xml:space="preserve">
+    <value>還原</value>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+
+  <!-- ===== Buttons ===== -->
+  <data name="Btn_New" xml:space="preserve">
+    <value>新增</value>
+  </data>
+  <data name="Btn_Edit" xml:space="preserve">
+    <value>編輯</value>
+  </data>
+  <data name="Btn_Delete" xml:space="preserve">
+    <value>刪除</value>
+  </data>
+  <data name="Btn_RunNow" xml:space="preserve">
+    <value>立即執行</value>
+  </data>
+  <data name="Btn_Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Btn_Browse" xml:space="preserve">
+    <value>瀏覽…</value>
+  </data>
+  <data name="Btn_Restore" xml:space="preserve">
+    <value>還原</value>
+  </data>
+  <data name="Btn_Ok" xml:space="preserve">
+    <value>確定</value>
+  </data>
+  <data name="Btn_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+
+  <!-- ===== Job detail labels ===== -->
+  <data name="Detail_Source" xml:space="preserve">
+    <value>來源：</value>
+  </data>
+  <data name="Detail_Destination" xml:space="preserve">
+    <value>目的地：</value>
+  </data>
+  <data name="Detail_BackupType" xml:space="preserve">
+    <value>備份類型：</value>
+  </data>
+  <data name="Detail_NextRun" xml:space="preserve">
+    <value>下次執行：</value>
+  </data>
+  <data name="Detail_LastRun" xml:space="preserve">
+    <value>上次執行：</value>
+  </data>
+  <data name="Detail_Enabled" xml:space="preserve">
+    <value>已啟用：</value>
+  </data>
+
+  <!-- ===== History grid columns ===== -->
+  <data name="Col_Job" xml:space="preserve">
+    <value>作業</value>
+  </data>
+  <data name="Col_StartedLocal" xml:space="preserve">
+    <value>開始時間（本機）</value>
+  </data>
+  <data name="Col_Type" xml:space="preserve">
+    <value>類型</value>
+  </data>
+  <data name="Col_Status" xml:space="preserve">
+    <value>狀態</value>
+  </data>
+  <data name="Col_Files" xml:space="preserve">
+    <value>檔案數</value>
+  </data>
+  <data name="Col_Bytes" xml:space="preserve">
+    <value>位元組</value>
+  </data>
+  <data name="Col_Duration" xml:space="preserve">
+    <value>所需時間</value>
+  </data>
+  <data name="Col_Details" xml:space="preserve">
+    <value>詳情</value>
+  </data>
+
+  <!-- ===== Shared short values ===== -->
+  <data name="Common_Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="Common_No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="Common_Never" xml:space="preserve">
+    <value>從未執行</value>
+  </data>
+  <data name="Common_DueNow" xml:space="preserve">
+    <value>現在到期</value>
+  </data>
+
+  <!-- ===== Help paragraphs ===== -->
+  <data name="Hint_Differential" xml:space="preserve">
+    <value>差異備份只會複製自上次完整備份後變更過的檔案。如果尚未有任何完整備份，首次執行會以完整備份方式進行。</value>
+  </data>
+  <data name="Hint_Restore" xml:space="preserve">
+    <value>還原差異備份集時，會先還原作為基準的完整備份，再把差異檔案套用到上面，因此目標資料夾的內容會回復到該次差異備份執行時的狀態。</value>
+  </data>
+  <data name="Hint_Tray" xml:space="preserve">
+    <value>關閉視窗後，程式仍會繼續在系統匣中執行。排程備份只在程式執行期間才會進行，因此建議設定為隨 Windows 啟動。</value>
+  </data>
+  <data name="Hint_AppData" xml:space="preserve">
+    <value>執行記錄與每次執行的日誌存放在 %APPDATA%\FileBackup。每個備份集資料夾都有一份 manifest.json，記載該次執行所備份的檔案。</value>
+  </data>
+
+  <!-- ===== Restore tab ===== -->
+  <data name="Restore_Heading" xml:space="preserve">
+    <value>將備份集還原到資料夾</value>
+  </data>
+  <data name="Restore_Job" xml:space="preserve">
+    <value>作業：</value>
+  </data>
+  <data name="Restore_BackupSet" xml:space="preserve">
+    <value>備份集（由新到舊）：</value>
+  </data>
+  <data name="Restore_TargetFolder" xml:space="preserve">
+    <value>還原到資料夾：</value>
+  </data>
+
+  <!-- ===== Job edit dialog ===== -->
+  <data name="Edit_Title" xml:space="preserve">
+    <value>備份作業</value>
+  </data>
+  <data name="Edit_JobName" xml:space="preserve">
+    <value>作業名稱：</value>
+  </data>
+  <data name="Edit_SourceFolder" xml:space="preserve">
+    <value>來源資料夾：</value>
+  </data>
+  <data name="Edit_Destination" xml:space="preserve">
+    <value>目的地：</value>
+  </data>
+  <data name="Edit_Frequency" xml:space="preserve">
+    <value>頻率：</value>
+  </data>
+  <data name="Edit_At" xml:space="preserve">
+    <value>於</value>
+  </data>
+  <data name="Edit_AtToolTip" xml:space="preserve">
+    <value>本機時間（HH:mm）</value>
+  </data>
+  <data name="Edit_BackupType" xml:space="preserve">
+    <value>備份類型：</value>
+  </data>
+  <data name="Edit_DiffHint" xml:space="preserve">
+    <value>差異備份只會複製自上次完整備份後變更過的檔案。</value>
+  </data>
+  <data name="Edit_Enabled" xml:space="preserve">
+    <value>已啟用：</value>
+  </data>
+
+  <!-- ===== Edit dialog validation errors ===== -->
+  <data name="Err_NameRequired" xml:space="preserve">
+    <value>請輸入作業名稱。</value>
+  </data>
+  <data name="Err_SourceMissing" xml:space="preserve">
+    <value>來源資料夾不存在。</value>
+  </data>
+  <data name="Err_DestRequired" xml:space="preserve">
+    <value>請選擇目的地資料夾。</value>
+  </data>
+  <data name="Err_TimeFormat" xml:space="preserve">
+    <value>時間必須使用 HH:mm 格式，例如 02:30。</value>
+  </data>
+
+  <!-- ===== Run kind (subject of the completion sentences) ===== -->
+  <data name="Kind_Scheduled" xml:space="preserve">
+    <value>排程備份</value>
+  </data>
+  <data name="Kind_Manual" xml:space="preserve">
+    <value>備份</value>
+  </data>
+
+  <!-- ===== Status bar ===== -->
+  <data name="Status_Ready" xml:space="preserve">
+    <value>就緒</value>
+  </data>
+  <data name="Status_ConfigSaveFailed" xml:space="preserve">
+    <value>儲存設定失敗：{0}</value>
+  </data>
+  <data name="Status_StartupFailed" xml:space="preserve">
+    <value>更新隨 Windows 啟動設定失敗：{0}</value>
+  </data>
+  <data name="Status_ScheduledStarted" xml:space="preserve">
+    <value>排程備份已開始：{0}</value>
+  </data>
+  <data name="Status_BackupCompleted" xml:space="preserve">
+    <value>{0}「{1}」已完成：{2} 個檔案，{3}（{4}）。</value>
+  </data>
+  <data name="Status_BackupCancelled" xml:space="preserve">
+    <value>{0}「{1}」已取消。</value>
+  </data>
+  <data name="Status_BackupFailed" xml:space="preserve">
+    <value>{0}「{1}」失敗：{2}</value>
+  </data>
+  <data name="Status_JobCreated" xml:space="preserve">
+    <value>已新增作業「{0}」。</value>
+  </data>
+  <data name="Status_JobUpdated" xml:space="preserve">
+    <value>已更新作業「{0}」。</value>
+  </data>
+  <data name="Status_JobDeleted" xml:space="preserve">
+    <value>已刪除作業「{0}」。</value>
+  </data>
+  <data name="Status_SelectJobFirst" xml:space="preserve">
+    <value>請先選取一個作業。</value>
+  </data>
+  <data name="Status_Stopping" xml:space="preserve">
+    <value>正在停止目前的備份…</value>
+  </data>
+  <data name="Status_BackingUp" xml:space="preserve">
+    <value>正在備份「{0}」…</value>
+  </data>
+  <data name="Status_BackupError" xml:space="preserve">
+    <value>備份發生錯誤：{0}</value>
+  </data>
+  <data name="Status_ProgressFiles" xml:space="preserve">
+    <value>{0}/{1} 個檔案 - {2} - {3}</value>
+  </data>
+  <data name="Status_Restoring" xml:space="preserve">
+    <value>正在還原「{0}」…</value>
+  </data>
+  <data name="Status_ProgressRestore" xml:space="preserve">
+    <value>{0}/{1} 個檔案 - {2}</value>
+  </data>
+  <data name="Status_RestoreCompleted" xml:space="preserve">
+    <value>還原完成：{0} 個檔案，{1}。</value>
+  </data>
+  <data name="Status_RestoreCancelled" xml:space="preserve">
+    <value>還原已取消。</value>
+  </data>
+  <data name="Status_RestoreFailed" xml:space="preserve">
+    <value>還原失敗：{0}</value>
+  </data>
+  <data name="Status_RestoreError" xml:space="preserve">
+    <value>還原發生錯誤：{0}</value>
+  </data>
+  <data name="Status_LanguageRestartHint" xml:space="preserve">
+    <value>已儲存語言設定。請重新啟動程式以套用。</value>
+  </data>
+
+  <!-- ===== Message boxes and folder browser prompts ===== -->
+  <data name="Msg_DeleteConfirm" xml:space="preserve">
+    <value>要刪除作業「{0}」嗎？目的地中現有的備份集會保留。</value>
+  </data>
+  <data name="Msg_DeleteCaption" xml:space="preserve">
+    <value>確認刪除</value>
+  </data>
+  <data name="Msg_Busy" xml:space="preserve">
+    <value>已有另一個備份正在執行。</value>
+  </data>
+  <data name="Msg_RestoreSelectFirst" xml:space="preserve">
+    <value>請先選取作業和備份集。</value>
+  </data>
+  <data name="Msg_RestorePickFolder" xml:space="preserve">
+    <value>請選擇要還原到的資料夾。</value>
+  </data>
+  <data name="Msg_OperationBusy" xml:space="preserve">
+    <value>已有另一項操作正在執行。</value>
+  </data>
+  <data name="Msg_BrowseRestoreTarget" xml:space="preserve">
+    <value>選取要還原到的資料夾</value>
+  </data>
+  <data name="Msg_BrowseSource" xml:space="preserve">
+    <value>選取要備份的來源資料夾</value>
+  </data>
+  <data name="Msg_BrowseDest" xml:space="preserve">
+    <value>選取存放備份的目的地資料夾</value>
+  </data>
+
+  <!-- ===== Schedule descriptions ===== -->
+  <data name="Schedule_DailyAt" xml:space="preserve">
+    <value>每日 {0}（{1}）</value>
+  </data>
+  <data name="Schedule_WeeklyAt" xml:space="preserve">
+    <value>每{0} {1}（{2}）</value>
+  </data>
+  <data name="Schedule_MonthlyAt" xml:space="preserve">
+    <value>每月 {0} 日 {1}（{2}）</value>
+  </data>
+
+  <!-- ===== Settings tab ===== -->
+  <data name="Settings_StartWithWindows" xml:space="preserve">
+    <value>隨 Windows 啟動 File Backup</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>語言</value>
+  </data>
+
+  <!-- ===== Enum display names ===== -->
+  <data name="Enum_BackupType_Full" xml:space="preserve">
+    <value>完整備份</value>
+  </data>
+  <data name="Enum_BackupType_Differential" xml:space="preserve">
+    <value>差異備份</value>
+  </data>
+  <data name="Enum_ScheduleType_Daily" xml:space="preserve">
+    <value>每日</value>
+  </data>
+  <data name="Enum_ScheduleType_Weekly" xml:space="preserve">
+    <value>每週</value>
+  </data>
+  <data name="Enum_ScheduleType_Monthly" xml:space="preserve">
+    <value>每月</value>
+  </data>
+  <data name="Enum_RunStatus_Completed" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="Enum_RunStatus_CompletedWithWarnings" xml:space="preserve">
+    <value>已完成（有警告）</value>
+  </data>
+  <data name="Enum_RunStatus_Failed" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="Enum_RunStatus_Cancelled" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+</root>

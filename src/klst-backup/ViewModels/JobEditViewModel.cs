@@ -1,7 +1,9 @@
 using System;
+using System.Globalization;
 using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using KlstBackup.Models;
+using KlstBackup.Resources;
 
 namespace KlstBackup.ViewModels;
 
@@ -49,7 +51,10 @@ public partial class JobEditViewModel : ObservableObject
         _destPath = job.DestPath;
         _enabled = job.Enabled;
         _scheduleType = job.ScheduleType;
-        _timeText = job.Time.ToString("HH:mm");
+        // "HH:mm" is the documented input contract (see Edit_AtToolTip). Both the write and the
+        // read side are pinned to the invariant culture so a locale whose TimeSeparator is not
+        // ":" cannot break the round trip.
+        _timeText = job.Time.ToString("HH\\:mm", CultureInfo.InvariantCulture);
         _weekDay = job.WeekDay ?? DayOfWeek.Sunday;
         _dayOfMonth = job.DayOfMonth;
         _jobType = job.JobType;
@@ -60,25 +65,25 @@ public partial class JobEditViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(Name))
         {
-            Error = "Please enter a job name.";
+            Error = Strings.Err_NameRequired;
             return false;
         }
 
         if (string.IsNullOrWhiteSpace(SourcePath) || !Directory.Exists(SourcePath))
         {
-            Error = "The source folder does not exist.";
+            Error = Strings.Err_SourceMissing;
             return false;
         }
 
         if (string.IsNullOrWhiteSpace(DestPath))
         {
-            Error = "Please choose a destination folder.";
+            Error = Strings.Err_DestRequired;
             return false;
         }
 
-        if (!TimeOnly.TryParseExact(TimeText.Trim(), "HH:mm", out var time))
+        if (!TimeOnly.TryParseExact(TimeText.Trim(), "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out var time))
         {
-            Error = "Time must use the HH:mm format, e.g. 02:30.";
+            Error = Strings.Err_TimeFormat;
             return false;
         }
 

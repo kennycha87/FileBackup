@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -137,7 +138,9 @@ public static class ManifestStore
             stamp = stamp[..15];
         }
 
-        if (DateTime.TryParseExact(stamp, "yyyyMMdd_HHmmss", null, System.Globalization.DateTimeStyles.None, out var value))
+        // Pairs with the write side in BackupEngine.RunBackup: the set folder stamp is always
+        // invariant, so it must be read back invariant regardless of the ambient culture.
+        if (DateTime.TryParseExact(stamp, "yyyyMMdd_HHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var value))
         {
             return value;
         }

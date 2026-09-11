@@ -6,6 +6,17 @@ using Xunit;
 
 namespace KlstBackup.Tests;
 
+/// <summary>
+/// Shares the <c>ManifestStoreRoot</c> collection with every other test class that touches the
+/// static, hard-coded <c>%APPDATA%\FileBackup\sets</c> root, so those classes run sequentially
+/// relative to each other instead of racing (xUnit parallelizes test classes by default). Without
+/// this, another class's cleanup can delete a manifest written here between the write and the
+/// assertion - <see cref="ManifestStore.Load"/> then returns null and
+/// <see cref="ManifestStore.FindLatestFullSet"/> legitimately falls back to parsing the set-folder
+/// name, which is exactly what <c>FindLatestFullSet_PrefersManifestCreatedTimeOverSetName</c>
+/// asserts must NOT win. Unrelated classes keep running in parallel.
+/// </summary>
+[Collection("ManifestStoreRoot")]
 public class ManifestStoreTests : IDisposable
 {
     private readonly Guid _jobId = Guid.NewGuid();
