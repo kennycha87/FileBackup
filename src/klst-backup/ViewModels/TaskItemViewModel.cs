@@ -1,6 +1,8 @@
 using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using KlstBackup.Models;
+// Disambiguate from System.Threading.Tasks.TaskStatus (implicit usings)
+using TaskStatus = KlstBackup.Models.TaskStatus;
 
 namespace KlstBackup.ViewModels;
 
