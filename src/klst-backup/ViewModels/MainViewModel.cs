@@ -307,7 +307,7 @@ public partial class MainViewModel : ObservableObject
     {
         if (_dashboard is null)
         {
-            _dashboard = new DashboardWindow(new DashboardViewModel(App.TaskQueue));
+            _dashboard = new DashboardWindow(new DashboardViewModel(App.TaskQueue, App.ResourceMonitor));
             _dashboard.Closed += (_, _) => _dashboard = null;
             _dashboard.Show();
         }

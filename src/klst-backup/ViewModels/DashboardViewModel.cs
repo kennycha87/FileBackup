@@ -12,6 +12,7 @@ namespace KlstBackup.ViewModels;
 public partial class DashboardViewModel : ObservableObject
 {
     private readonly TaskQueueManager _taskQueueManager;
+    private readonly ResourceMonitor _resourceMonitor;
     private readonly DispatcherTimer _refreshTimer;
 
     public ObservableCollection<TaskItemViewModel> ActiveTasks { get; } = new();
@@ -25,9 +26,10 @@ public partial class DashboardViewModel : ObservableObject
     [ObservableProperty]
     private long _memoryUsage;
 
-    public DashboardViewModel(TaskQueueManager taskQueueManager)
+    public DashboardViewModel(TaskQueueManager taskQueueManager, ResourceMonitor resourceMonitor)
     {
         _taskQueueManager = taskQueueManager;
+        _resourceMonitor = resourceMonitor;
 
         _taskQueueManager.TaskStarted += OnTaskStarted;
         _taskQueueManager.TaskCompleted += OnTaskCompleted;
@@ -41,11 +43,22 @@ public partial class DashboardViewModel : ObservableObject
         _refreshTimer.Start();
 
         RefreshTasks();
+        UpdateResourceUsage();
     }
 
     private void OnRefreshTimer(object? sender, EventArgs e)
     {
         RefreshTasks();
+        if (ShowResourceMonitor)
+        {
+            UpdateResourceUsage();
+        }
+    }
+
+    private void UpdateResourceUsage()
+    {
+        CpuUsage = _resourceMonitor.GetCpuUsage();
+        MemoryUsage = _resourceMonitor.GetMemoryUsage() / (1024 * 1024); // Convert bytes to MB
     }
 
     private void RefreshTasks()

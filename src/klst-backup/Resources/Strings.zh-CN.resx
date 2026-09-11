@@ -136,6 +136,26 @@
   <data name="Btn_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
+  <data name="Btn_Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="Btn_Resume" xml:space="preserve">
+    <value>继续</value>
+  </data>
+
+  <!-- ===== Dashboard window ===== -->
+  <data name="Dashboard_Title" xml:space="preserve">
+    <value>活跃备份任务</value>
+  </data>
+  <data name="Dashboard_ResourceMonitor" xml:space="preserve">
+    <value>显示资源监控</value>
+  </data>
+  <data name="Dashboard_CPU" xml:space="preserve">
+    <value>CPU：</value>
+  </data>
+  <data name="Dashboard_Memory" xml:space="preserve">
+    <value>内存：</value>
+  </data>
 
   <!-- ===== Job detail labels ===== -->
   <data name="Detail_Source" xml:space="preserve">

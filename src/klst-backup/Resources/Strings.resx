@@ -134,6 +134,26 @@
   <data name="Btn_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Btn_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Btn_Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+
+  <!-- ===== Dashboard window ===== -->
+  <data name="Dashboard_Title" xml:space="preserve">
+    <value>Active Backup Tasks</value>
+  </data>
+  <data name="Dashboard_ResourceMonitor" xml:space="preserve">
+    <value>Show Resource Monitor</value>
+  </data>
+  <data name="Dashboard_CPU" xml:space="preserve">
+    <value>CPU:</value>
+  </data>
+  <data name="Dashboard_Memory" xml:space="preserve">
+    <value>Memory:</value>
+  </data>
 
   <!-- ===== Job detail labels (trailing colons are part of the value) ===== -->
   <data name="Detail_Source" xml:space="preserve">
