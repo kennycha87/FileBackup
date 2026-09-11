@@ -34,7 +34,7 @@
             <TabItem Header="{x:Static res:Strings.Tab_Jobs}">
                 <Grid Margin="8">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="360" />
+                        <ColumnDefinition Width="420" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
