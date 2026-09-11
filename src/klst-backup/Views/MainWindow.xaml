@@ -39,7 +39,7 @@
                     </Grid.ColumnDefinitions>
 
                     <DockPanel Grid.Column="0" Margin="0,0,10,0">
-                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
+                        <WrapPanel DockPanel.Dock="Bottom" Margin="0,8,0,0">
                             <Button Content="{x:Static res:Strings.Btn_New}" Command="{Binding NewJobCommand}" Padding="12,4" Margin="0,0,6,0" />
                             <Button Content="{x:Static res:Strings.Btn_Edit}" Command="{Binding EditJobCommand}" Padding="12,4" Margin="0,0,6,0" />
                             <Button Content="{x:Static res:Strings.Btn_Delete}" Command="{Binding DeleteJobCommand}" Padding="12,4" Margin="0,0,6,0" />
@@ -48,7 +48,7 @@
                             <Button Content="{x:Static res:Strings.Btn_Stop}" Command="{Binding StopRunCommand}" Padding="12,4" Margin="0,0,6,0"
                                     IsEnabled="{Binding IsBusy}" />
                             <Button Content="{x:Static res:Strings.Btn_Dashboard}" Command="{Binding OpenDashboardCommand}" Padding="12,4" />
-                        </StackPanel>
+                        </WrapPanel>
 
                         <ListBox ItemsSource="{Binding Jobs}" SelectedItem="{Binding SelectedJob}"
                                  HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
