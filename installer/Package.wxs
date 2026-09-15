@@ -1,0 +1,80 @@
+<!--
+  WiX v4+ schema – defines the MSI package for File Backup.
+  Build: dotnet build installer/klst-backup.Installer.wixproj -p:PublishDir=src/klst-backup/bin/publish/
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+
+  <Package Name="File Backup"
+           Manufacturer="KLST"
+           Version="$(var.AppVersion)"
+           UpgradeCode="d4e5f6a7-1234-5678-9abc-def012345678"
+           Scope="perMachine">
+
+    <!-- Major Upgrade: detect and replace any earlier version -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of File Backup is already installed." />
+
+    <!-- Embed cabinet in the MSI for single-file distribution -->
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- ── Directory structure ────────────────────────────────────────── -->
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="ManufacturerFolder" Name="KLST">
+        <Directory Id="AppFolder" Name="File Backup" />
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="File Backup" />
+    </StandardDirectory>
+
+    <!-- DesktopFolder is a standard directory, no need to declare it -->
+
+    <!-- ── Harvested application files (populated by HarvestDirectory) ── -->
+    <ComponentGroupRef Id="AppHarvestedComponents" />
+
+    <!-- ── Shortcuts ──────────────────────────────────────────────────── -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="StartMenuShortcut" Guid="a1b2c3d4-e5f6-7890-abcd-ef0123456789">
+        <Shortcut Id="StartMenuShortcutEntry"
+                  Name="File Backup"
+                  Description="Windows file backup application"
+                  Target="[AppFolder]klst-backup.exe"
+                  WorkingDirectory="AppFolder" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\KLST\FileBackup"
+                       Name="StartMenuShortcut"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes" />
+        <RemoveFolder Id="RemoveStartMenuFolder" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+
+    <StandardDirectory Id="DesktopFolder">
+      <Component Id="DesktopShortcut" Guid="b2c3d4e5-f6a7-8901-bcde-f01234567890">
+        <Shortcut Id="DesktopShortcutEntry"
+                  Name="File Backup"
+                  Description="Windows file backup application"
+                  Target="[AppFolder]klst-backup.exe"
+                  WorkingDirectory="AppFolder" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\KLST\FileBackup"
+                       Name="DesktopShortcut"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes" />
+      </Component>
+    </StandardDirectory>
+
+    <!-- ── Installer UI (WixUI_InstallDir lets user choose install path) ─ -->
+    <ui:WixUI Id="WixUI_InstallDir"
+              InstallDirectory="AppFolder" />
+
+    <!-- Icon for Add/Remove Programs -->
+    <Icon Id="AppIcon" SourceFile="..\src\klst-backup\Assets\app.ico" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon" />
+
+  </Package>
+
+</Wix>

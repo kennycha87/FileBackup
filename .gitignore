@@ -7,6 +7,8 @@ x86/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+tmp/
+docs/
 
 # Visual Studio / Rider cache
 .vs/
@@ -29,3 +31,9 @@ project.lock.json
 
 # Publish output
 publish/
+src/klst-backup/bin/publish/
+
+# Installer output
+installer/bin/
+installer/obj/
+installer/HarvestedFiles.wxs

@@ -1,0 +1,20 @@
+<Project Sdk="WixToolset.Sdk/5.0.2">
+
+  <PropertyGroup>
+    <!-- Build x64 MSI by default -->
+    <InstallerPlatform>x64</InstallerPlatform>
+    <!-- Pass the app version to WiX preprocessor -->
+    <DefineConstants>AppVersion=1.0.0</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Reference the main application project so WiX creates a bind path to its output -->
+  <ItemGroup>
+    <ProjectReference Include="..\src\klst-backup\klst-backup.csproj" />
+  </ItemGroup>
+
+  <!-- UI extension for the standard installer wizard dialogs -->
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>

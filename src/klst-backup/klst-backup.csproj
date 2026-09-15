@@ -12,6 +12,7 @@
     <Version>1.0.0</Version>
     <Product>File Backup</Product>
     <Description>Windows file backup application with full and differential backups.</Description>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
     <!-- Neutral (fallback) resources are en-US: Resources\Strings.resx carries no culture suffix.
          SatelliteResourceLanguages bounds the build output to exactly these three locales. -->
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -22,6 +23,10 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\app.ico" />
   </ItemGroup>
 
   <!-- Avoid WinForms/WPF name clashes (Application, MessageBox, ...) -->
