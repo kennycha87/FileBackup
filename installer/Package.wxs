@@ -40,6 +40,7 @@
                   Name="File Backup"
                   Description="Windows file backup application"
                   Target="[AppFolder]klst-backup.exe"
+                  Arguments="--reset"
                   WorkingDirectory="AppFolder" />
         <RegistryValue Root="HKCU"
                        Key="Software\KLST\FileBackup"
@@ -57,6 +58,7 @@
                   Name="File Backup"
                   Description="Windows file backup application"
                   Target="[AppFolder]klst-backup.exe"
+                  Arguments="--reset"
                   WorkingDirectory="AppFolder" />
         <RegistryValue Root="HKCU"
                        Key="Software\KLST\FileBackup"
