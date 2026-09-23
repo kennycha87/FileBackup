@@ -116,12 +116,54 @@ src\klst-backup\
                   MainWindow（工作 / 紀錄 / 還原 / 設定分頁）、JobEditDialog
   App.xaml        Application entry point and resources / 應用程式進入點與資源
 
+brand\
+  assets\         Source artwork: 4 app icon variants + 4 logo lockups (SVG)
+                  來源素材：4 款應用程式圖示與 4 款標誌組合（SVG）
+  website\        Static brand showcase site / 靜態品牌展示網站
+  brand.design    Design document the assets were generated from / 產生素材的設計文件
+
 tests\klst-backup.Tests\
   BackupEngineTests.cs     Full, differential, restore, and cancellation tests
                            完整、差異、還原與取消測試
   ManifestStoreTests.cs    Manifest save/load and set enumeration tests
                            Manifest 存取與備份集列舉測試
   SchedulerMathTests.cs    Schedule calculation tests / 排程計算測試
+  BrandAssetTests.cs       Guards AppIcon against drift from brand\assets
+                           驗證 AppIcon 與 brand\assets 的一致性
+```
+
+---
+
+## Brand assets / 品牌素材
+
+The app icon and logo system lives in `brand\`. `Services\AppIcon.cs` rebuilds the tile and
+monogram from the same path data as `brand\assets\app-icon-tile.svg`, so the window, taskbar,
+tray icon and installer all show identical artwork.
+
+應用程式圖示與標誌系統位於 `brand\`。`Services\AppIcon.cs` 以與
+`brand\assets\app-icon-tile.svg` 相同的路徑資料重建圖磚與字母造型，因此視窗、工作列、系統匣圖示與
+安裝程式顯示的圖案完全一致。
+
+```powershell
+# Regenerate Assets\app.ico (16–256 px) from the brand design / 由品牌設計重新產生 app.ico
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\generate-icon.ps1
+```
+
+### Brand showcase site / 品牌展示網站
+
+A dependency-free static site that documents the icon variants, logo lockups, palette and type
+scale. No build step — open it directly, or serve the folder:
+
+無需建置的靜態網站，說明圖示款式、標誌組合、色票與字體階層。可直接開啟，或以本機伺服器瀏覽：
+
+```powershell
+# Option 1 / 方式一: open the file / 直接開啟檔案
+start brand\website\index.html
+
+# Option 2 / 方式二: serve it (recommended — keeps relative asset paths clean)
+# 建議以本機伺服器瀏覽，相對路徑最乾淨
+cd brand; python -m http.server 8123
+# then open http://127.0.0.1:8123/website/
 ```
 
 ---

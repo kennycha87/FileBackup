@@ -1,7 +1,8 @@
 <Application x:Class="KlstBackup.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:KlstBackup.ViewModels">
+             xmlns:vm="clr-namespace:KlstBackup.ViewModels"
+             xmlns:services="clr-namespace:KlstBackup.Services">
     <Application.Resources>
         <!-- Display-only localization converters, registered once at app level so both windows
              and every DataGridColumn (which is not in the visual tree) can reach them.
@@ -14,5 +15,35 @@
              (not Hidden) so layout reflows properly when Pause/Resume buttons swap. -->
         <vm:BoolToVisibilityConverter x:Key="BoolToVis" />
         <vm:InverseBoolToVisibilityConverter x:Key="InverseBoolToVis" />
+
+        <!-- ===================== Brand =====================
+             Literal values are copied from brand/assets/*.svg; the vector geometry itself
+             lives in Services\AppIcon.cs so the header mark and the executable's icon are
+             rendered from one definition. -->
+
+        <!-- Wordmark accent on a dark field (tray tooltip, dark surfaces). -->
+        <SolidColorBrush x:Key="BrandAccentBrush" Color="#57C8FF" />
+
+        <!-- White field behind the in-app lockups (logo-horizontal-light.svg). -->
+        <SolidColorBrush x:Key="BrandFieldBrush" Color="#FFFFFF" />
+
+        <!-- Hairline that separates the white brand field from the window body. -->
+        <SolidColorBrush x:Key="BrandHairlineBrush" Color="#E6E9F2" />
+
+        <!-- Radial #2E4BD1 glow behind the mark on the light field, at the 10% the
+             brand source uses so it tints without greying the white. -->
+        <RadialGradientBrush x:Key="BrandGlowBrush" Center="0.5,0.5" GradientOrigin="0.5,0.5"
+                             RadiusX="0.5" RadiusY="0.5">
+            <GradientStop Color="#1A2E4BD1" Offset="0" />
+            <GradientStop Color="#082E4BD1" Offset="0.6" />
+            <GradientStop Color="#002E4BD1" Offset="1" />
+        </RadialGradientBrush>
+
+        <!-- Applied explicitly by each Window so the title bar and taskbar button carry the
+             brand mark. Kept as a keyed style rather than an implicit one so a future window
+             has to opt in visibly. -->
+        <Style x:Key="BrandWindowStyle" TargetType="Window">
+            <Setter Property="Icon" Value="{x:Static services:AppIcon.ImageSource}" />
+        </Style>
     </Application.Resources>
 </Application>

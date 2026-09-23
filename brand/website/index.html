@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File Backup — App Icon &amp; Logo System</title>
+<meta name="description" content="Brand system for File Backup: gradient tile app icons, horizontal and stacked wordmark lockups, colour palette, type scale and downloadable vector assets.">
+<meta name="theme-color" content="#12152E">
+<link rel="icon" href="../assets/app-icon-tile.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#overview">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="#overview" aria-label="File Backup — back to top">
+      <img class="brand__mark" src="../assets/app-icon-tile.svg" alt="" width="34" height="34" decoding="async">
+      <span class="wordmark wordmark--sm">
+        <span class="wordmark__file">File</span><span class="wordmark__backup">&nbsp;Backup</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">
+      <span class="nav-toggle__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+
+    <nav class="primary-nav" id="primary-nav" aria-label="Sections">
+      <ul class="primary-nav__list">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#icons">Icon</a></li>
+        <li><a href="#logo">Logo</a></li>
+        <li><a href="#palette">Colour</a></li>
+        <li><a href="#type">Type</a></li>
+        <li><a href="#features">Product</a></li>
+        <li><a href="#assets">Assets</a></li>
+      </ul>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
+        <span class="theme-toggle__icon" aria-hidden="true"></span>
+        <span class="theme-toggle__label" data-theme-label>Light</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ══════════════════════════ OVERVIEW / HERO ══════════════════════════ -->
+  <section class="hero" id="overview" aria-labelledby="hero-title">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="container hero__inner">
+
+      <div class="hero__copy reveal">
+        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>App icon &amp; logo system</p>
+
+        <h1 class="hero__title" id="hero-title">
+          <span class="wordmark wordmark--xl">
+            <span class="wordmark__file">File</span><span class="wordmark__backup">&nbsp;Backup</span>
+          </span>
+        </h1>
+
+        <p class="lede">
+          Two stacked vault plates, drawn as one continuous monogram. A gradient tile for the
+          launcher, a two-tone glyph for everything that has to stay transparent — and one
+          wordmark typeset in Segoe&nbsp;UI that matches the Windows desktop app.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#assets">Browse vector assets</a>
+          <a class="btn btn--ghost" href="#icons">Explore the icon</a>
+        </div>
+
+        <ul class="hero__meta">
+          <li><strong>8</strong> vector SVG assets</li>
+          <li><strong>4</strong> icon variants</li>
+          <li><strong>3</strong> UI locales</li>
+          <li><strong>Windows</strong> .NET&nbsp;8&nbsp;WPF</li>
+        </ul>
+      </div>
+
+      <div class="hero__art reveal" aria-hidden="true">
+        <div class="hero__tile">
+          <img src="../assets/app-icon-tile.svg" alt="File Backup app icon" width="320" height="320" decoding="async">
+        </div>
+        <div class="hero__chips">
+          <span class="hero__chip" style="--d:0ms"><img src="../assets/app-icon-solid.svg" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+          <span class="hero__chip" style="--d:60ms"><img src="../assets/app-icon-glyph.svg" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+          <span class="hero__chip" style="--d:120ms"><img src="../assets/app-icon-mono.svg" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ ICON SYSTEM ══════════════════════════ -->
+  <section class="section" id="icons" aria-labelledby="icons-title">
+    <div class="container">
+
+      <div class="section__head reveal">
+        <p class="section__index">01 — Icon</p>
+        <h2 class="section__title" id="icons-title">The mark survives every size</h2>
+        <p class="section__lede">
+          One tile, one monogram, four finishes. Pick the finish by context, never by taste:
+          gradient on the launcher, flat for print, two-tone on transparent surfaces,
+          single-colour wherever colour is not available.
+        </p>
+      </div>
+
+      <div class="toolbar reveal" role="group" aria-label="Icon preview controls">
+        <div class="segmented" data-group="icon-surface">
+          <span class="segmented__label" id="surface-label">Surface</span>
+          <div class="segmented__track" role="radiogroup" aria-labelledby="surface-label">
+            <button type="button" role="radio" aria-checked="true" data-surface="dark">Dark</button>
+            <button type="button" role="radio" aria-checked="false" data-surface="light">Light</button>
+            <button type="button" role="radio" aria-checked="false" data-surface="checker">Checker</button>
+          </div>
+        </div>
+
+        <div class="segmented" data-group="icon-size">
+          <span class="segmented__label" id="size-label">Preview size</span>
+          <div class="segmented__track segmented__track--wide" role="radiogroup" aria-labelledby="size-label">
+            <button type="button" role="radio" aria-checked="false" data-size="16">16</button>
+            <button type="button" role="radio" aria-checked="true" data-size="48">48</button>
+            <button type="button" role="radio" aria-checked="false" data-size="64">64</button>
+            <button type="button" role="radio" aria-checked="false" data-size="96">96</button>
+            <button type="button" role="radio" aria-checked="false" data-size="128">128</button>
+          </div>
+        </div>
+      </div>
+
+      <ul class="icon-grid reveal" id="icon-grid" data-surface="dark" data-size="48">
+
+        <li class="card icon-card">
+          <div class="icon-stage">
+            <img src="../assets/app-icon-tile.svg" alt="Primary gradient tile app icon" width="1024" height="1024" loading="lazy" decoding="async">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Primary gradient tile</h3>
+            <p class="card__text">
+              Rounded tile, three-stop indigo gradient with a top-left sheen and a 14% inner
+              hairline. The default icon on Windows, in the store listing and in marketing.
+            </p>
+            <p class="card__meta"><code>app-icon-tile.svg</code> · 1024×1024</p>
+          </div>
+        </li>
+
+        <li class="card icon-card">
+          <div class="icon-stage">
+            <img src="../assets/app-icon-solid.svg" alt="Solid indigo tile app icon" width="1024" height="1024" loading="lazy" decoding="async">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Solid indigo tile</h3>
+            <p class="card__text">
+              The same tile flattened to <code>#141733</code>. Use where a gradient would band,
+              dither or cost ink — print, embroidery and single-pass rendering.
+            </p>
+            <p class="card__meta"><code>app-icon-solid.svg</code> · 1024×1024</p>
+          </div>
+        </li>
+
+        <li class="card icon-card">
+          <div class="icon-stage">
+            <img src="../assets/app-icon-glyph.svg" alt="Two-tone monogram glyph, transparent background" width="1024" height="1024" loading="lazy" decoding="async">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Two-tone glyph</h3>
+            <p class="card__text">
+              Transparent monogram, ink <code>#1F2A78</code> over accent <code>#2AA8F5</code>.
+              For light surfaces that already carry their own container or shadow.
+            </p>
+            <p class="card__meta"><code>app-icon-glyph.svg</code> · 1024×1024</p>
+          </div>
+        </li>
+
+        <li class="card icon-card">
+          <div class="icon-stage">
+            <img src="../assets/app-icon-mono.svg" alt="Monochrome monogram glyph, transparent background" width="1024" height="1024" loading="lazy" decoding="async">
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Monochrome glyph</h3>
+            <p class="card__text">
+              Drawn with <code>currentColor</code>, so it inherits whatever it is placed in.
+              One colour, no fallback, no exceptions.
+            </p>
+            <p class="card__meta"><code>app-icon-mono.svg</code> · 1024×1024</p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ LOGO SYSTEM ══════════════════════════ -->
+  <section class="section section--alt" id="logo" aria-labelledby="logo-title">
+    <div class="container">
+
+      <div class="section__head reveal">
+        <p class="section__index">02 — Logo</p>
+        <h2 class="section__title" id="logo-title">Lockups, and when to use them</h2>
+        <p class="section__lede">
+          The wordmark pairs Segoe UI Regular (400) for <em>File</em> with Segoe UI Semibold (600)
+          for <em>Backup</em>. The weight shift is the only emphasis device — no underline, no
+          colour fill on the whole name.
+        </p>
+      </div>
+
+      <div class="logo-grid reveal">
+
+        <figure class="card logo-card logo-card--wide">
+          <div class="logo-frame">
+            <img src="../assets/logo-horizontal-dark.svg" alt="Horizontal File Backup lockup on a deep indigo background" width="1920" height="1080" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="card__body">
+            <h3 class="card__title">Horizontal · on dark</h3>
+            <p class="card__text">Primary lockup. Deep indigo field, white <em>File</em>, cyan <em>Backup</em>. Splash screens, dark UI, presentations.</p>
+            <p class="card__meta"><code>logo-horizontal-dark.svg</code> · 1920×1080</p>
+          </figcaption>
+        </figure>
+
+        <figure class="card logo-card logo-card--wide">
+          <div class="logo-frame">
+            <img src="../assets/logo-horizontal-light.svg" alt="Horizontal File Backup lockup on a white background" width="1920" height="1080" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="card__body">
+            <h3 class="card__title">Horizontal · on light</h3>
+            <p class="card__text">Same lockup for paper and light UI. Ink <code>#141733</code> for <em>File</em>, <code>#2AA8F5</code> — not the bright cyan — for <em>Backup</em>.</p>
+            <p class="card__meta"><code>logo-horizontal-light.svg</code> · 1920×1080</p>
+          </figcaption>
+        </figure>
+
+        <figure class="card logo-card">
+          <div class="logo-frame">
+            <img src="../assets/logo-stacked.svg" alt="Stacked File Backup lockup" width="1920" height="1080" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="card__body">
+            <h3 class="card__title">Stacked</h3>
+            <p class="card__text">Square-ish footprint for covers, avatars and tiles too narrow for the horizontal lockup.</p>
+            <p class="card__meta"><code>logo-stacked.svg</code> · 1920×1080</p>
+          </figcaption>
+        </figure>
+
+        <figure class="card logo-card">
+          <div class="logo-frame">
+            <img src="../assets/logo-lockup-mono.svg" alt="Monochrome File Backup lockup" width="1600" height="900" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="card__body">
+            <h3 class="card__title">Monochrome lockup</h3>
+            <p class="card__text">Single-colour tile plus <code>currentColor</code> wordmark. Faxes, stamps, one-colour print and legal footers.</p>
+            <p class="card__meta"><code>logo-lockup-mono.svg</code> · 1600×900</p>
+          </figcaption>
+        </figure>
+
+      </div>
+
+      <div class="rules reveal">
+        <div class="rules__col">
+          <h3 class="rules__title">Do</h3>
+          <ul class="rules__list rules__list--do">
+            <li>Keep clear space of at least half the tile height on every side.</li>
+            <li>Scale the lockup proportionally — width and height move together.</li>
+            <li>Below 120&nbsp;px of lockup width, drop the wordmark and use the tile alone.</li>
+            <li>Below 16&nbsp;px, switch to the solid tile so the monogram stays legible.</li>
+          </ul>
+        </div>
+        <div class="rules__col">
+          <h3 class="rules__title">Don't</h3>
+          <ul class="rules__list rules__list--dont">
+            <li>Recolour the monogram, or fill the whole name in cyan.</li>
+            <li>Rotate, skew, stretch or add a drop shadow to the tile.</li>
+            <li>Place the glyph directly on a busy photograph without a container.</li>
+            <li>Rebuild the wordmark in another typeface — it is Segoe UI, weights 400 and 600.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PALETTE ══════════════════════════ -->
+  <section class="section" id="palette" aria-labelledby="palette-title">
+    <div class="container">
+
+      <div class="section__head reveal">
+        <p class="section__index">03 — Colour</p>
+        <h2 class="section__title" id="palette-title">Indigo, and one cyan</h2>
+        <p class="section__lede">
+          Indigo carries the mass, cyan carries the signal. Select any swatch to copy its hex value.
+        </p>
+      </div>
+
+      <div class="palette reveal">
+
+        <div class="palette__group">
+          <h3 class="palette__group-title">Tile gradient</h3>
+          <p class="palette__group-note">Stop 0 → 0.46 → 1, running diagonally across the tile.</p>
+          <ul class="swatches">
+            <li><button class="swatch" type="button" data-hex="#3355E0" style="--swatch:#3355E0">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Indigo 500</span><span class="swatch__hex">#3355E0</span>
+            </button></li>
+            <li><button class="swatch" type="button" data-hex="#212A80" style="--swatch:#212A80">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Indigo 700</span><span class="swatch__hex">#212A80</span>
+            </button></li>
+            <li><button class="swatch" type="button" data-hex="#12152E" style="--swatch:#12152E">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Indigo 950</span><span class="swatch__hex">#12152E</span>
+            </button></li>
+          </ul>
+        </div>
+
+        <div class="palette__group">
+          <h3 class="palette__group-title">Accent</h3>
+          <p class="palette__group-note">Cyan 300 on dark, Cyan 500 on light. Sheen and glow are light effects, not fills.</p>
+          <ul class="swatches">
+            <li><button class="swatch" type="button" data-hex="#57C8FF" style="--swatch:#57C8FF">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Cyan 300</span><span class="swatch__hex">#57C8FF</span>
+            </button></li>
+            <li><button class="swatch" type="button" data-hex="#2AA8F5" style="--swatch:#2AA8F5">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Cyan 500</span><span class="swatch__hex">#2AA8F5</span>
+            </button></li>
+            <li><button class="swatch" type="button" data-hex="#8FB6FF" style="--swatch:#8FB6FF">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Sheen</span><span class="swatch__hex">#8FB6FF</span>
+            </button></li>
+            <li><button class="swatch" type="button" data-hex="#2E4BD1" style="--swatch:#2E4BD1">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Glow</span><span class="swatch__hex">#2E4BD1</span>
+            </button></li>
+          </ul>
+        </div>
+
+        <div class="palette__group">
+          <h3 class="palette__group-title">Surface</h3>
+          <p class="palette__group-note">The deep field behind the lockups.</p>
+          <ul class="swatches">
+            <li><button class="swatch" type="button" data-hex="#1C2358" style="--swatch:#1C2358">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Surface 700</span><span class="swatch__hex">#1C2358</span>
+            </button></li>
+            <li><button class="swatch" type="button" data-hex="#141838" style="--swatch:#141838">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Surface 850</span><span class="swatch__hex">#141838</span>
+            </button></li>
+            <li><button class="swatch" type="button" data-hex="#0C0F24" style="--swatch:#0C0F24">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Surface 950</span><span class="swatch__hex">#0C0F24</span>
+            </button></li>
+          </ul>
+        </div>
+
+        <div class="palette__group">
+          <h3 class="palette__group-title">Ink</h3>
+          <p class="palette__group-note">Monogram and wordmark on light surfaces.</p>
+          <ul class="swatches">
+            <li><button class="swatch" type="button" data-hex="#1F2A78" style="--swatch:#1F2A78">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Ink 800</span><span class="swatch__hex">#1F2A78</span>
+            </button></li>
+            <li><button class="swatch" type="button" data-hex="#141733" style="--swatch:#141733">
+              <span class="swatch__chip" aria-hidden="true"></span>
+              <span class="swatch__name">Ink 900</span><span class="swatch__hex">#141733</span>
+            </button></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ TYPE ══════════════════════════ -->
+  <section class="section section--alt" id="type" aria-labelledby="type-title">
+    <div class="container">
+
+      <div class="section__head reveal">
+        <p class="section__index">04 — Type</p>
+        <h2 class="section__title" id="type-title">Segoe UI, two weights</h2>
+        <p class="section__lede">
+          The wordmark is typeset in Segoe UI — the same family the desktop application renders in,
+          so the logo and the product never disagree. Only 400 and 600 are used.
+        </p>
+      </div>
+
+      <div class="specimen reveal">
+        <div class="specimen__row">
+          <p class="specimen__label">Wordmark · 260 / 400 · 600</p>
+          <p class="wordmark wordmark--specimen">
+            <span class="wordmark__file">File</span><span class="wordmark__backup">&nbsp;Backup</span>
+          </p>
+        </div>
+        <div class="specimen__row">
+          <p class="specimen__label">Display · 40 / 600</p>
+          <p class="specimen__sample specimen__sample--display">Scheduled backups, silently.</p>
+        </div>
+        <div class="specimen__row">
+          <p class="specimen__label">Heading · 24 / 600</p>
+          <p class="specimen__sample specimen__sample--h">Differential runs copy only what changed.</p>
+        </div>
+        <div class="specimen__row">
+          <p class="specimen__label">Body · 16 / 400</p>
+          <p class="specimen__sample specimen__sample--body">
+            Backup files are written directly to the destination you choose, so the folder stays a
+            readable mirror of the source. Manifests and run history live in AppData instead.
+          </p>
+        </div>
+        <div class="specimen__row">
+          <p class="specimen__label">Caption · 12 / 400 · 0.08em</p>
+          <p class="specimen__sample specimen__sample--caption">FULL BACKUP · 02:00 · 1 284 FILES · 4.6 GB</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PRODUCT ══════════════════════════ -->
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="container">
+
+      <div class="section__head reveal">
+        <p class="section__index">05 — Product</p>
+        <h2 class="section__title" id="features-title">What the brand is a brand of</h2>
+        <p class="section__lede">
+          File Backup is a .NET 8 WPF desktop application. The icon system above ships with it —
+          the mark is the same geometry the app draws at runtime.
+        </p>
+      </div>
+
+      <ul class="feature-grid reveal">
+        <li class="card feature">
+          <h3 class="card__title">Backup jobs</h3>
+          <p class="card__text">Point any source at any destination, name it, and switch it on or off.</p>
+        </li>
+        <li class="card feature">
+          <h3 class="card__title">Flexible schedules</h3>
+          <p class="card__text">Daily, weekly on a chosen weekday, or monthly on a chosen date — each at its own HH:mm.</p>
+        </li>
+        <li class="card feature">
+          <h3 class="card__title">Full &amp; differential</h3>
+          <p class="card__text">Copy everything, or only what changed since the last full backup.</p>
+        </li>
+        <li class="card feature">
+          <h3 class="card__title">Restore</h3>
+          <p class="card__text">Pick a job, a backup set and a target folder. The base full set is applied first.</p>
+        </li>
+        <li class="card feature">
+          <h3 class="card__title">History &amp; logs</h3>
+          <p class="card__text">Every run is recorded with type, status, file count, bytes and duration.</p>
+        </li>
+        <li class="card feature">
+          <h3 class="card__title">System tray</h3>
+          <p class="card__text">Closing the window minimises to the tray, and schedules keep firing.</p>
+        </li>
+      </ul>
+
+      <div class="tabs reveal" id="how-tabs">
+        <div class="tabs__list" role="tablist" aria-label="How it works">
+          <button class="tabs__tab" role="tab" id="tab-full" aria-controls="panel-full" aria-selected="true" tabindex="0">Full backup</button>
+          <button class="tabs__tab" role="tab" id="tab-diff" aria-controls="panel-diff" aria-selected="false" tabindex="-1">Differential</button>
+          <button class="tabs__tab" role="tab" id="tab-restore" aria-controls="panel-restore" aria-selected="false" tabindex="-1">Restore</button>
+        </div>
+
+        <div class="tabs__panels">
+          <div class="tabs__panel" role="tabpanel" id="panel-full" aria-labelledby="tab-full" tabindex="0">
+            <ol class="steps">
+              <li><strong>Copy everything.</strong> Every file under the source is written to the destination, preserving the directory structure.</li>
+              <li><strong>Stamp the set.</strong> The run is written as <code>Full_yyyyMMdd_HHmmss</code>.</li>
+              <li><strong>Record a manifest.</strong> Relative path, size and last-write time for every file captured.</li>
+            </ol>
+          </div>
+
+          <div class="tabs__panel" role="tabpanel" id="panel-diff" aria-labelledby="tab-diff" tabindex="0" hidden>
+            <ol class="steps">
+              <li><strong>Load the baseline.</strong> The most recent <code>Full_*</code> manifest is read from AppData.</li>
+              <li><strong>Compare.</strong> Each source file is checked against the baseline by size and last-write time.</li>
+              <li><strong>Copy the delta.</strong> Only new and changed files reach the destination.</li>
+              <li><strong>No full set yet?</strong> The first run is promoted to a full backup automatically.</li>
+            </ol>
+          </div>
+
+          <div class="tabs__panel" role="tabpanel" id="panel-restore" aria-labelledby="tab-restore" tabindex="0" hidden>
+            <ol class="steps">
+              <li><strong>Choose a set.</strong> Sets are listed newest first.</li>
+              <li><strong>Apply the base.</strong> For a differential set, its full backup is restored first.</li>
+              <li><strong>Apply the delta.</strong> Differential files are layered on top, reconstructing that moment.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ ASSETS ══════════════════════════ -->
+  <section class="section section--alt" id="assets" aria-labelledby="assets-title">
+    <div class="container">
+
+      <div class="section__head reveal">
+        <p class="section__index">06 — Assets</p>
+        <h2 class="section__title" id="assets-title">Download the system</h2>
+        <p class="section__lede">
+          Eight files, all vector, all hand-authored — no bitmap upscaling anywhere in the set.
+        </p>
+      </div>
+
+      <ul class="asset-grid reveal" id="asset-grid">
+        <li class="asset">
+          <img class="asset__thumb" src="../assets/app-icon-tile.svg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <div class="asset__info">
+            <p class="asset__name">Primary gradient tile</p>
+            <p class="asset__meta">SVG · 1024×1024 · 1:1</p>
+          </div>
+          <a class="asset__dl" href="../assets/app-icon-tile.svg" download>Download</a>
+        </li>
+        <li class="asset">
+          <img class="asset__thumb" src="../assets/app-icon-solid.svg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <div class="asset__info">
+            <p class="asset__name">Solid indigo tile</p>
+            <p class="asset__meta">SVG · 1024×1024 · 1:1</p>
+          </div>
+          <a class="asset__dl" href="../assets/app-icon-solid.svg" download>Download</a>
+        </li>
+        <li class="asset">
+          <img class="asset__thumb" src="../assets/app-icon-glyph.svg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <div class="asset__info">
+            <p class="asset__name">Two-tone glyph</p>
+            <p class="asset__meta">SVG · 1024×1024 · 1:1</p>
+          </div>
+          <a class="asset__dl" href="../assets/app-icon-glyph.svg" download>Download</a>
+        </li>
+        <li class="asset">
+          <img class="asset__thumb" src="../assets/app-icon-mono.svg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <div class="asset__info">
+            <p class="asset__name">Monochrome glyph</p>
+            <p class="asset__meta">SVG · 1024×1024 · 1:1</p>
+          </div>
+          <a class="asset__dl" href="../assets/app-icon-mono.svg" download>Download</a>
+        </li>
+        <li class="asset">
+          <img class="asset__thumb" src="../assets/logo-horizontal-dark.svg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <div class="asset__info">
+            <p class="asset__name">Horizontal lockup · dark</p>
+            <p class="asset__meta">SVG · 1920×1080 · 16:9</p>
+          </div>
+          <a class="asset__dl" href="../assets/logo-horizontal-dark.svg" download>Download</a>
+        </li>
+        <li class="asset">
+          <img class="asset__thumb" src="../assets/logo-horizontal-light.svg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <div class="asset__info">
+            <p class="asset__name">Horizontal lockup · light</p>
+            <p class="asset__meta">SVG · 1920×1080 · 16:9</p>
+          </div>
+          <a class="asset__dl" href="../assets/logo-horizontal-light.svg" download>Download</a>
+        </li>
+        <li class="asset">
+          <img class="asset__thumb" src="../assets/logo-stacked.svg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <div class="asset__info">
+            <p class="asset__name">Stacked lockup</p>
+            <p class="asset__meta">SVG · 1920×1080 · 16:9</p>
+          </div>
+          <a class="asset__dl" href="../assets/logo-stacked.svg" download>Download</a>
+        </li>
+        <li class="asset">
+          <img class="asset__thumb" src="../assets/logo-lockup-mono.svg" alt="" width="64" height="64" loading="lazy" decoding="async">
+          <div class="asset__info">
+            <p class="asset__name">Monochrome lockup</p>
+            <p class="asset__meta">SVG · 1600×900 · 16:9</p>
+          </div>
+          <a class="asset__dl" href="../assets/logo-lockup-mono.svg" download>Download</a>
+        </li>
+      </ul>
+
+      <p class="assets__note reveal">
+        The application consumes the same geometry: <code>AppIcon</code> rebuilds the tile and monogram
+        from the identical path data at runtime, so the taskbar, tray, window and installer all show
+        the mark above rather than a redrawn approximation.
+      </p>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../assets/app-icon-tile.svg" alt="" width="40" height="40" loading="lazy" decoding="async">
+      <span class="wordmark wordmark--sm">
+        <span class="wordmark__file">File</span><span class="wordmark__backup">&nbsp;Backup</span>
+      </span>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <a href="#icons">Icon</a>
+      <a href="#logo">Logo</a>
+      <a href="#palette">Colour</a>
+      <a href="#assets">Assets</a>
+    </nav>
+    <p class="site-footer__legal">MIT licensed. Segoe UI is a Microsoft typeface; the wordmark is set in it, not redistributed with it.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js" defer></script>
+</body>
+</html>

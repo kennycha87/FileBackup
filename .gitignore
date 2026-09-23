@@ -33,7 +33,3 @@ project.lock.json
 publish/
 src/klst-backup/bin/publish/
 
-# Installer output
-installer/bin/
-installer/obj/
-installer/HarvestedFiles.wxs

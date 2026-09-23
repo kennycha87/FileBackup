@@ -76,6 +76,15 @@
   <data name="Msg_Caption" xml:space="preserve">
     <value>File Backup</value>
   </data>
+  <data name="App_Tagline" xml:space="preserve">
+    <value>為 Windows 而設的排程檔案備份</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
+  <data name="About_MarkNote" xml:space="preserve">
+    <value>標誌由兩塊上下相疊的備份層組成：上方是完整備份，下方是差異變更，兩者由同一個連續的字母造型裁切而成。</value>
+  </data>
 
   <!-- ===== System tray ===== -->
   <data name="Tray_Tooltip" xml:space="preserve">

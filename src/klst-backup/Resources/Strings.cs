@@ -38,6 +38,15 @@ public static class Strings
     /// <summary>Caption for every message box. Brand name: untranslated in every locale.</summary>
     public static string Msg_Caption => Get(nameof(Msg_Caption));
 
+    /// <summary>One-line description shown under the wordmark in the window's brand band.</summary>
+    public static string App_Tagline => Get(nameof(App_Tagline));
+
+    /// <summary><c>{0}</c> = product version, e.g. "1.0.0".</summary>
+    public static string About_Version => Get(nameof(About_Version));
+
+    /// <summary>Explains the two stacked plates of the brand mark on the About plate.</summary>
+    public static string About_MarkNote => Get(nameof(About_MarkNote));
+
     // ----- System tray -----
 
     /// <summary>Tray tooltip. Brand name: untranslated in every locale (WinForms caps

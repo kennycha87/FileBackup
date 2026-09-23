@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="File Backup application icon, primary gradient tile">
+  <defs>
+    <linearGradient id="fbTileBase" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3355E0"/>
+      <stop offset="0.46" stop-color="#212A80"/>
+      <stop offset="1" stop-color="#12152E"/>
+    </linearGradient>
+    <radialGradient id="fbTileSheen" cx="0.26" cy="0.14" r="0.92">
+      <stop offset="0" stop-color="#8FB6FF" stop-opacity="0.30"/>
+      <stop offset="0.45" stop-color="#8FB6FF" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#8FB6FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="1024" rx="224" ry="224" fill="url(#fbTileBase)"/>
+  <rect width="1024" height="1024" rx="224" ry="224" fill="url(#fbTileSheen)"/>
+  <rect x="5" y="5" width="1014" height="1014" rx="219" ry="219" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="6"/>
+
+  <g fill-rule="evenodd">
+    <path fill="#FFFFFF" d="M326 214H563.5A134.5 134.5 0 0 1 563.5 483H326Z M412 300H563.5A48.5 48.5 0 0 1 563.5 397H412Z"/>
+    <path fill="#57C8FF" d="M326 541H563.5A134.5 134.5 0 0 1 563.5 810H326Z M412 627H563.5A48.5 48.5 0 0 1 563.5 724H412Z"/>
+  </g>
+</svg>

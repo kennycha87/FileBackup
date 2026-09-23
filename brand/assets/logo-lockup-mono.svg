@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" style="color:#141733" role="img" aria-label="File Backup monochrome horizontal lockup">
+  <rect width="1600" height="900" fill="#FFFFFF"/>
+
+  <!-- mono tile 192px at (286.64, 354) -->
+  <g transform="translate(286.64 354) scale(0.1875)">
+    <rect width="1024" height="1024" rx="224" ry="224" fill="currentColor"/>
+    <g fill="#FFFFFF" fill-rule="evenodd">
+      <path d="M326 214H563.5A134.5 134.5 0 0 1 563.5 483H326Z M412 300H563.5A48.5 48.5 0 0 1 563.5 397H412Z"/>
+      <path d="M326 541H563.5A134.5 134.5 0 0 1 563.5 810H326Z M412 627H563.5A48.5 48.5 0 0 1 563.5 724H412Z"/>
+    </g>
+  </g>
+
+  <!-- wordmark: Segoe UI Semibold 150, measured width 770.72, baseline 502.43 -->
+  <text x="542.64" y="502.43" font-family="'Segoe UI','Segoe UI Variable Text',system-ui,sans-serif" font-size="150" font-weight="600" fill="currentColor" text-rendering="geometricPrecision">File Backup</text>
+</svg>

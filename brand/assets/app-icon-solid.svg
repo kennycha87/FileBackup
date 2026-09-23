@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="File Backup application icon, flat deep indigo tile">
+  <rect width="1024" height="1024" rx="224" ry="224" fill="#141733"/>
+
+  <g fill-rule="evenodd">
+    <path fill="#FFFFFF" d="M326 214H563.5A134.5 134.5 0 0 1 563.5 483H326Z M412 300H563.5A48.5 48.5 0 0 1 563.5 397H412Z"/>
+    <path fill="#57C8FF" d="M326 541H563.5A134.5 134.5 0 0 1 563.5 810H326Z M412 627H563.5A48.5 48.5 0 0 1 563.5 724H412Z"/>
+  </g>
+</svg>
