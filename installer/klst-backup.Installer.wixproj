@@ -4,7 +4,7 @@
     <!-- Build x64 MSI by default -->
     <InstallerPlatform>x64</InstallerPlatform>
     <!-- Pass the app version to WiX preprocessor -->
-    <DefineConstants>AppVersion=1.0.0</DefineConstants>
+    <DefineConstants>AppVersion=1.0.1</DefineConstants>
   </PropertyGroup>
 
   <!-- Reference the main application project so WiX creates a bind path to its output -->
