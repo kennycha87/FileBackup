@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="File Backup stacked logo lockup on white">
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- two-tone glyph mark, scale 0.62, centered: bbox x[326,698] y[214,810] -->
+  <g transform="translate(642.56 71.68) scale(0.62)" fill-rule="evenodd">
+    <path fill="#1F2A78" d="M326 214H563.5A134.5 134.5 0 0 1 563.5 483H326Z M412 300H563.5A48.5 48.5 0 0 1 563.5 397H412Z"/>
+    <path fill="#2AA8F5" d="M326 541H563.5A134.5 134.5 0 0 1 563.5 810H326Z M412 627H563.5A48.5 48.5 0 0 1 563.5 724H412Z"/>
+  </g>
+
+  <!-- wordmark: Segoe UI Semibold 260, measured width 1335.927, centered -->
+  <text x="292.04" y="875.65" font-family="'Segoe UI','Segoe UI Variable Text',system-ui,sans-serif" font-size="260" font-weight="600" fill="#1F2A78" text-rendering="geometricPrecision">File Backup</text>
+</svg>

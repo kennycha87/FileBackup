@@ -1,0 +1,28 @@
+{
+  "skill": {
+    "name": "solo-graphic-generation",
+    "version": "2026.08.06.21.24.57",
+    "release": "unsupported-size-user-confirmation"
+  },
+  "projectName": "File Backup — App Icon & Logo",
+  "requestedSizes": [
+    { "label": "App icon", "size": "1024x1024", "aspect": "1:1" },
+    { "label": "Logo lockup", "size": "1920x1080", "aspect": "16:9" }
+  ],
+  "actualSizes": [
+    { "label": "App icon variants", "size": "1024x1024" },
+    { "label": "Logo horizontal / stacked", "size": "1920x1080" },
+    { "label": "Logo monochrome lockup", "size": "1600x900" }
+  ],
+  "notes": "Vector SVG assets authored directly for icon/logo fidelity. Monochrome lockup uses 16:9-equivalent 1600x900. Wordmark typeset in Segoe UI (400/600) to match the Windows/WPF application.",
+  "assets": [
+    { "file": "app-icon-tile.svg", "title": "App icon — primary gradient tile", "size": "1024x1024", "nodeId": "image-001", "status": "generated" },
+    { "file": "app-icon-solid.svg", "title": "App icon — solid indigo tile", "size": "1024x1024", "nodeId": "image-002", "status": "generated" },
+    { "file": "app-icon-glyph.svg", "title": "App icon — two-tone glyph (transparent)", "size": "1024x1024", "nodeId": "image-003", "status": "generated" },
+    { "file": "app-icon-mono.svg", "title": "App icon — monochrome glyph (transparent)", "size": "1024x1024", "nodeId": "image-004", "status": "generated" },
+    { "file": "logo-horizontal-dark.svg", "title": "Logo lockup — horizontal on dark", "size": "1920x1080", "nodeId": "image-005", "status": "generated" },
+    { "file": "logo-horizontal-light.svg", "title": "Logo lockup — horizontal on light", "size": "1920x1080", "nodeId": "image-006", "status": "generated" },
+    { "file": "logo-stacked.svg", "title": "Logo lockup — stacked", "size": "1920x1080", "nodeId": "image-007", "status": "generated" },
+    { "file": "logo-lockup-mono.svg", "title": "Logo lockup — monochrome", "size": "1600x900", "nodeId": "image-008", "status": "generated" }
+  ]
+}

@@ -4,6 +4,7 @@
         xmlns:vm="clr-namespace:KlstBackup.ViewModels"
         xmlns:res="clr-namespace:KlstBackup.Resources"
         Title="{x:Static res:Strings.Edit_Title}"
+        Style="{StaticResource BrandWindowStyle}"
         Width="580" SizeToContent="Height"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"

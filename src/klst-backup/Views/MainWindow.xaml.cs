@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.Globalization;
+using System.Reflection;
 using System.Windows;
 using KlstBackup.Resources;
 using KlstBackup.Services;
@@ -21,7 +23,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainViewModel();
-        Icon = AppIcon.CreateImageSource();
 
         _notifyIcon = new WinForms.NotifyIcon
         {
@@ -39,6 +40,33 @@ public partial class MainWindow : Window
         });
         _notifyIcon.ContextMenuStrip = menu;
         _notifyIcon.DoubleClick += (_, _) => RestoreFromTray();
+    }
+
+    /// <summary>
+    /// Version line for the About plate in the Settings tab. Built once, after
+    /// <see cref="App"/> has applied the configured UI language, so the localized
+    /// "Version {0}" wrapper matches the rest of the window.
+    /// </summary>
+    public static string VersionText { get; } =
+        string.Format(CultureInfo.CurrentUICulture, Strings.About_Version, AppVersion);
+
+    private static string AppVersion
+    {
+        get
+        {
+            var assembly = typeof(MainWindow).Assembly;
+            var informational = assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+
+            if (string.IsNullOrEmpty(informational))
+            {
+                return assembly.GetName().Version?.ToString(3) ?? "1.0.0";
+            }
+
+            // SourceLink appends "+<commit>"; the About plate only wants the version.
+            var build = informational.IndexOf('+');
+            return build < 0 ? informational : informational[..build];
+        }
     }
 
     private void RestoreFromTray()

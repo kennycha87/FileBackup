@@ -1,0 +1,153 @@
+{
+  "data": [
+    {
+      "id": "image-001",
+      "title": "App icon — primary gradient tile",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789495400000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "naturalSize": {
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/app-icon-tile.svg"
+      }
+    },
+    {
+      "id": "image-002",
+      "title": "App icon — solid indigo tile",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789495401000,
+      "canvasData": {
+        "x": 480,
+        "y": 0,
+        "naturalSize": {
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/app-icon-solid.svg"
+      }
+    },
+    {
+      "id": "image-003",
+      "title": "App icon — two-tone glyph (transparent)",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789495402000,
+      "canvasData": {
+        "x": 960,
+        "y": 0,
+        "naturalSize": {
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/app-icon-glyph.svg"
+      }
+    },
+    {
+      "id": "image-004",
+      "title": "App icon — monochrome glyph (transparent)",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789495403000,
+      "canvasData": {
+        "x": 1440,
+        "y": 0,
+        "naturalSize": {
+          "width": 1024,
+          "height": 1024
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/app-icon-mono.svg"
+      }
+    },
+    {
+      "id": "image-005",
+      "title": "Logo lockup — horizontal on dark",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789495404000,
+      "canvasData": {
+        "x": 1920,
+        "y": 0,
+        "naturalSize": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/logo-horizontal-dark.svg"
+      }
+    },
+    {
+      "id": "image-006",
+      "title": "Logo lockup — horizontal on light",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789495405000,
+      "canvasData": {
+        "x": 2400,
+        "y": 0,
+        "naturalSize": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/logo-horizontal-light.svg"
+      }
+    },
+    {
+      "id": "image-007",
+      "title": "Logo lockup — stacked",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789495406000,
+      "canvasData": {
+        "x": 2880,
+        "y": 0,
+        "naturalSize": {
+          "width": 1920,
+          "height": 1080
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/logo-stacked.svg"
+      }
+    },
+    {
+      "id": "image-008",
+      "title": "Logo lockup — monochrome",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1789495407000,
+      "canvasData": {
+        "x": 3360,
+        "y": 0,
+        "naturalSize": {
+          "width": 1600,
+          "height": 900
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/logo-lockup-mono.svg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "freeSize",
+    "projectName": "File Backup — App Icon & Logo"
+  }
+}

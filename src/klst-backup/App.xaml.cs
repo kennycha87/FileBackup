@@ -81,6 +81,39 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
+        // ── Handle command-line arguments ──────────────────────────────
+        var args = e.Args.Select(a => a.ToLowerInvariant()).ToArray();
+
+        if (args.Contains("--help") || args.Contains("-h"))
+        {
+            System.Windows.MessageBox.Show(
+                "File Backup – command-line options:\n\n"
+                + "  --reset    Clear all application data (config, logs, checkpoints, manifests)\n"
+                + "             in %APPDATA%\\FileBackup and start fresh.\n"
+                + "  --help     Show this help message.",
+                "File Backup", MessageBoxButton.OK, MessageBoxImage.Information);
+            Shutdown();
+            return;
+        }
+
+        if (args.Contains("--reset"))
+        {
+            var appData = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "FileBackup");
+            if (Directory.Exists(appData))
+            {
+                try
+                {
+                    Directory.Delete(appData, recursive: true);
+                }
+                catch
+                {
+                    // best effort – some files may be locked
+                }
+            }
+        }
+
         _singleInstanceMutex = new Mutex(true, "FileBackup_SingleInstance_" + Environment.UserName, out var createdNew);
         if (!createdNew)
         {

@@ -74,6 +74,15 @@
   <data name="Msg_Caption" xml:space="preserve">
     <value>File Backup</value>
   </data>
+  <data name="App_Tagline" xml:space="preserve">
+    <value>Scheduled file backups for Windows</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="About_MarkNote" xml:space="preserve">
+    <value>The mark is two stacked vault plates: the full backup above, the differential changes below, both cut from one continuous monogram.</value>
+  </data>
 
   <!-- ===== System tray ===== -->
   <data name="Tray_Tooltip" xml:space="preserve">

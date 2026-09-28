@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="File Backup horizontal logo lockup on deep indigo">
+  <defs>
+    <linearGradient id="lgDarkBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1C2358"/>
+      <stop offset="0.55" stop-color="#141838"/>
+      <stop offset="1" stop-color="#0C0F24"/>
+    </linearGradient>
+    <radialGradient id="lgDarkGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#2E4BD1" stop-opacity="0.42"/>
+      <stop offset="0.55" stop-color="#2E4BD1" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#2E4BD1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lgDarkTile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3355E0"/>
+      <stop offset="0.46" stop-color="#212A80"/>
+      <stop offset="1" stop-color="#12152E"/>
+    </linearGradient>
+    <radialGradient id="lgDarkSheen" cx="0.26" cy="0.14" r="0.92">
+      <stop offset="0" stop-color="#8FB6FF" stop-opacity="0.30"/>
+      <stop offset="0.45" stop-color="#8FB6FF" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#8FB6FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#lgDarkBg)"/>
+  <ellipse cx="357.46" cy="540" rx="470" ry="470" fill="url(#lgDarkGlow)"/>
+
+  <!-- tile 330 at (192.46, 375) -->
+  <g transform="translate(192.46 375) scale(0.3222656)">
+    <rect width="1024" height="1024" rx="224" ry="224" fill="url(#lgDarkTile)"/>
+    <rect width="1024" height="1024" rx="224" ry="224" fill="url(#lgDarkSheen)"/>
+    <rect x="5" y="5" width="1014" height="1014" rx="219" ry="219" fill="none" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="7"/>
+    <g fill-rule="evenodd">
+      <path fill="#FFFFFF" d="M326 214H563.5A134.5 134.5 0 0 1 563.5 483H326Z M412 300H563.5A48.5 48.5 0 0 1 563.5 397H412Z"/>
+      <path fill="#57C8FF" d="M326 541H563.5A134.5 134.5 0 0 1 563.5 810H326Z M412 627H563.5A48.5 48.5 0 0 1 563.5 724H412Z"/>
+    </g>
+  </g>
+
+  <text x="610.46" y="616.9" font-family="'Segoe UI','Segoe UI Variable Text',system-ui,sans-serif" font-size="220" text-rendering="geometricPrecision"><tspan font-weight="400" fill="#FFFFFF">File</tspan><tspan font-weight="600" fill="#57C8FF"> Backup</tspan></text>
+</svg>

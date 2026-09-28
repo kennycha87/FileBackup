@@ -3,7 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:KlstBackup.ViewModels"
         xmlns:res="clr-namespace:KlstBackup.Resources"
+        xmlns:services="clr-namespace:KlstBackup.Services"
+        xmlns:views="clr-namespace:KlstBackup.Views"
         Title="{x:Static res:Strings.App_Title}"
+        Style="{StaticResource BrandWindowStyle}"
         Width="980" Height="640"
         MinWidth="820" MinHeight="520"
         WindowStartupLocation="CenterScreen">
@@ -14,6 +17,37 @@
     </Window.Resources>
 
     <DockPanel>
+        <!-- Brand band — the horizontal lockup from brand/assets/logo-horizontal-light.svg.
+             Fixed height: the decorative glow circle below is deliberately larger than the
+             band and must be clipped by it, never allowed to inflate the band's measured
+             height (an unsized dock top border would otherwise grow to the circle's 230px
+             and push the whole layout down). -->
+        <Border DockPanel.Dock="Top" Height="66" ClipToBounds="True"
+                Background="{StaticResource BrandFieldBrush}"
+                BorderBrush="{StaticResource BrandHairlineBrush}" BorderThickness="0,0,0,1">
+            <Grid ClipToBounds="True">
+                <Ellipse Width="230" Height="230" HorizontalAlignment="Left" VerticalAlignment="Center"
+                         Margin="-72,0,0,0" Fill="{StaticResource BrandGlowBrush}"
+                         IsHitTestVisible="False" />
+                <DockPanel Margin="16,11">
+                    <Image DockPanel.Dock="Left" Width="43" Height="43" VerticalAlignment="Center"
+                           Source="{x:Static services:AppIcon.LockupMarkSource}" />
+                    <StackPanel Margin="13,0,0,0" VerticalAlignment="Center">
+                        <TextBlock FontSize="18">
+                            <Run Text="File" FontWeight="Normal"
+                                 Foreground="{x:Static services:AppIcon.WordmarkInkBrush}" /><Run
+                                Text=" Backup" FontWeight="SemiBold"
+                                Foreground="{x:Static services:AppIcon.WordmarkAccentBrush}" />
+                        </TextBlock>
+                        <TextBlock Text="{x:Static res:Strings.App_Tagline}"
+                                   FontSize="11" Margin="0,2,0,0" Opacity="0.62"
+                                   Foreground="{x:Static services:AppIcon.WordmarkInkBrush}"
+                                   TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+        </Border>
+
         <StatusBar DockPanel.Dock="Bottom" Height="30">
             <StatusBarItem>
                 <TextBlock Text="{Binding StatusText}" TextTrimming="CharacterEllipsis" MaxWidth="560" />
@@ -183,22 +217,59 @@
 
             <!-- ================= Settings ================= -->
             <TabItem Header="{x:Static res:Strings.Tab_Settings}">
-                <StackPanel Margin="20" MaxWidth="680" HorizontalAlignment="Left">
-                    <CheckBox Content="{x:Static res:Strings.Settings_StartWithWindows}"
-                              IsChecked="{Binding StartWithWindows, UpdateSourceTrigger=PropertyChanged}"
-                              Margin="0,0,0,10" />
-                    <TextBlock Text="{x:Static res:Strings.Settings_Language}" Margin="0,16,0,4" />
-                    <ComboBox Width="280" HorizontalAlignment="Left"
-                              ItemsSource="{Binding LanguageOptions}"
-                              DisplayMemberPath="NativeName" SelectedValuePath="Tag"
-                              SelectedValue="{Binding Language, Mode=TwoWay}" />
-                    <TextBlock TextWrapping="Wrap" Foreground="Gray" Margin="0,6,0,0"
-                               Text="{x:Static res:Strings.Status_LanguageRestartHint}" />
-                    <TextBlock TextWrapping="Wrap" Foreground="Gray" Margin="0,16,0,0"
-                               Text="{x:Static res:Strings.Hint_Tray}" />
-                    <TextBlock TextWrapping="Wrap" Foreground="Gray" Margin="0,16,0,0"
-                               Text="{x:Static res:Strings.Hint_AppData}" />
-                </StackPanel>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="20" MaxWidth="680" HorizontalAlignment="Left">
+                        <CheckBox Content="{x:Static res:Strings.Settings_StartWithWindows}"
+                                  IsChecked="{Binding StartWithWindows, UpdateSourceTrigger=PropertyChanged}"
+                                  Margin="0,0,0,10" />
+                        <TextBlock Text="{x:Static res:Strings.Settings_Language}" Margin="0,16,0,4" />
+                        <ComboBox Width="280" HorizontalAlignment="Left"
+                                  ItemsSource="{Binding LanguageOptions}"
+                                  DisplayMemberPath="NativeName" SelectedValuePath="Tag"
+                                  SelectedValue="{Binding Language, Mode=TwoWay}" />
+                        <TextBlock TextWrapping="Wrap" Foreground="Gray" Margin="0,6,0,0"
+                                   Text="{x:Static res:Strings.Status_LanguageRestartHint}" />
+                        <TextBlock TextWrapping="Wrap" Foreground="Gray" Margin="0,16,0,0"
+                                   Text="{x:Static res:Strings.Hint_Tray}" />
+                        <TextBlock TextWrapping="Wrap" Foreground="Gray" Margin="0,16,0,0"
+                                   Text="{x:Static res:Strings.Hint_AppData}" />
+
+                        <!-- About plate — the same light-field lockup as the header band,
+                             as a bordered card. The glow circle is kept smaller than the
+                             card content so the content, not the decoration, sets the height. -->
+                        <Border Margin="0,30,0,4" CornerRadius="8" ClipToBounds="True"
+                                Background="{StaticResource BrandFieldBrush}"
+                                BorderBrush="{StaticResource BrandHairlineBrush}" BorderThickness="1">
+                            <Grid>
+                                <Ellipse Width="150" Height="150" HorizontalAlignment="Left"
+                                         VerticalAlignment="Center" Margin="-48,0,0,0"
+                                         Fill="{StaticResource BrandGlowBrush}"
+                                         IsHitTestVisible="False" />
+                                <StackPanel Margin="22,20,22,22">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="46" Height="46" VerticalAlignment="Center"
+                                               Source="{x:Static services:AppIcon.LockupMarkSource}" />
+                                        <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+                                            <TextBlock FontSize="19">
+                                                <Run Text="File" FontWeight="Normal"
+                                                     Foreground="{x:Static services:AppIcon.WordmarkInkBrush}" /><Run
+                                                    Text=" Backup" FontWeight="SemiBold"
+                                                    Foreground="{x:Static services:AppIcon.WordmarkAccentBrush}" />
+                                            </TextBlock>
+                                            <TextBlock Text="{x:Static views:MainWindow.VersionText}"
+                                                       FontSize="11" Margin="0,2,0,0" Opacity="0.62"
+                                                       Foreground="{x:Static services:AppIcon.WordmarkInkBrush}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <TextBlock Text="{x:Static res:Strings.About_MarkNote}"
+                                               TextWrapping="Wrap" FontSize="11.5" Margin="0,16,0,0"
+                                               Foreground="{x:Static services:AppIcon.WordmarkInkBrush}"
+                                               Opacity="0.62" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </DockPanel>
